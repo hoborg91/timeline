@@ -1,4 +1,4 @@
-import { IDateFormat, IUniFmtInterval, Interval } from "./dtos";
+import { IDateFormat, IUniFmtInterval, Interval, IMoment } from "./dtos";
 
 function ThrowFmtNotSupported(): never { throw new Error("The given time format is not supported."); }
 
@@ -30,7 +30,7 @@ export class Wizard {
 
         if (int1from > int2till || int1till < int2from)
             return "No intersection";
-            
+
         const isc = (from: number, till: number) => ({
             isc1: Interval(int1.fmt, from / this._yFactor(int1), till / this._yFactor(int1)),
             isc2: Interval(int2.fmt, from / this._yFactor(int2), till / this._yFactor(int2)),
@@ -47,5 +47,33 @@ export class Wizard {
             else
                 return isc(int1from, int2till);
         }
+    }
+}
+
+export class Mapping<T extends IDateFormat> {
+    private _widthRnd: number;
+    private _widthReal: number;
+    private _scale: number;
+    private _real: IUniFmtInterval<T>;
+
+    constructor (widthRnd: number, real: IUniFmtInterval<T>) {
+        if (real.fmt !== "my" && real.fmt != "y")
+            ThrowFmtNotSupported();
+        if (widthRnd <= 0)
+            throw new Error("The given width must be positive.");
+        
+        this._widthRnd = widthRnd;
+        this._widthReal = real.tillVal - real.fromVal;
+        this._scale = this._widthReal / this._widthRnd;
+        this._real = real;
+    }
+
+    public FromRealToRender(moment: IMoment<T>): number {
+        if (moment.fmt !== this._real.fmt)
+            throw new Error("Different date formats are not supported.");
+        
+        const difReal = moment.val - this._real.fromVal;
+        const result = difReal / this._scale;
+        return result;
     }
 }

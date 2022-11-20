@@ -1,5 +1,6 @@
-import { IDateFormat, IEvent, ILineSettings, Interval } from './dtos';
+import { IDateFormat, IEvent, ILineSettings, IMoment, Interval, Moment } from './dtos';
 import * as time from './time';
+import { Throw } from './utils';
 
 interface ILineReference {
     min: number;
@@ -12,6 +13,13 @@ interface ILineReference {
 interface IDocApi {
     createElement: (s: string) => HTMLElement;
     addRow: (tr: HTMLElement) => void;
+}
+
+interface IEventCluster<T extends IDateFormat> {
+    events: IEvent<T>[];
+    meanReal: IMoment<T>;
+    minReal: IMoment<T>;
+    maxReal: IMoment<T>;
 }
 
 type NumToStr = (n: number) => string;
@@ -31,6 +39,8 @@ export class Main {
     private _dims = {
         mainTdWidth: 600,
         mainTdHeight: 100,
+        descrBoxWidth: 150,
+        descrBoxHeight: 50,
     };
 
     private _dateFormatters: {
@@ -45,6 +55,7 @@ export class Main {
         allEvents: IEvent<IDateFormat>[],
         docApi: IDocApi
     ) {
+        // TODO EVERYWHERE! Date calculations: check operations with (million) years, e. g. (10 y. CE) - (10 y. BCE) = ?
         const refe = this._makeRef(lineSettings, allEvents);
 
         for (let lsi = 0; lsi < lineSettings.length; lsi++) {
@@ -52,7 +63,7 @@ export class Main {
             const fmtDt = this._dateFormatters[ls.interval.fmt];
             const curRef = refe[lsi];
 
-            this._renderMainRow(curRef, fmtDt, docApi);
+            this._renderMainRow(ls, curRef, fmtDt, docApi);
             
             if (lsi < lineSettings.length - 1) {
                 let nextLs = lineSettings[lsi + 1];
@@ -97,10 +108,14 @@ export class Main {
     }
 
     private _renderMainRow(
+        ls: ILineSettings,
         curRef: ILineReference,
         fmtDt: NumToStr,
         docApi: IDocApi
     ) {
+        const mapping = new time.Mapping(this._dims.mainTdWidth, ls.interval);
+        const rowRef = this._makeRowRef(curRef, mapping);
+        
         const td = docApi.createElement("td");
         td.style.cssText = `
             background-color: ${curRef.mainColor};
@@ -109,11 +124,15 @@ export class Main {
             position: relative;
         `;
     
-        for (let i = 0; i < curRef.eventsToRender.length; i++) {
-            const evt = curRef.eventsToRender[i];
-            const leftRel = (evt.time.val - curRef.min) / curRef.len;
+        for (let ci = 0; ci < rowRef.clusters.length; ci++) {
+            const cluster = rowRef.clusters[ci];
+            const evt = {
+                timeVal: cluster.meanReal.val as number,
+                img: cluster.events.length === 1 ? cluster.events[0].img : null,
+            };
+            const leftRel = (evt.timeVal - curRef.min) / curRef.len;
             const leftRender = leftRel * this._dims.mainTdWidth - 20; // TODO 20, 50 and so on - magic numbers. Refactor.
-            const evtDiv = docApi.createElement("div"); // TODO img might not be defined
+            const evtDiv = docApi.createElement("div");
             const borderCssVal = evt.img === undefined || evt.img === null || evt.img.length === 0
                 ? "2px solid white"
                 : "none";
@@ -123,7 +142,7 @@ export class Main {
                 height: 50px;
                 left: ${leftRender}px;
                 top: 20px;
-                z-index: ${i};
+                z-index: ${ci};
                 position: absolute;
                 background-image: url(${evt.img});
                 background-repeat: no-repeat;
@@ -134,20 +153,46 @@ export class Main {
             const descrDiv = docApi.createElement("div");
             
             descrDiv.style.cssText = `
-                width: 150px;
-                height: 50px;
+                width: ${this._dims.descrBoxWidth}px;
+                height: ${this._dims.descrBoxHeight}px;
                 left: ${leftRender}px;
                 top: -60px;
-                z-index: ${i};
+                z-index: ${ci};
                 position: absolute;
                 background-color: rgba(255, 255, 255, 0.5);
             `;
 
             const divCaption = docApi.createElement("div");
-            divCaption.innerText = evt.cpt;
+            if (cluster.events.length === 1) {
+                divCaption.innerText = cluster.events[0].cpt;
+            } else {
+                const renderedCount = cluster.events.length > 4
+                    ? 3
+                    : cluster.events.length;
+                let captionHtml = cluster.events
+                    .slice(0, renderedCount)
+                    .map(e => e.cpt)
+                    .reduce((acc, add) => acc + ", " + add);
+                const extraCount = cluster.events.length - renderedCount;
+                if (extraCount > 0) {
+                    const txt = extraCount === 1
+                        ? " another event"
+                        : " other events";
+                    captionHtml += ` <i>and ${extraCount} ${txt}</i>`;
+                }
+                divCaption.innerHTML = captionHtml;
+            }
 
             const divDate = docApi.createElement("div");
-            divDate.innerHTML = `<small>${fmtDt(evt.time.val)}</small>`;
+            if (cluster.events.length === 1) {
+                divDate.innerHTML = `<small>${fmtDt(evt.timeVal)}</small>`;
+            } else {
+                // const min = cluster.minReal.val, max = cluster.maxReal.val;
+                // if (min * max < 0)
+                    divDate.innerHTML = `<small>${fmtDt(cluster.minReal.val)} — ${fmtDt(cluster.maxReal.val)}</small>`;
+                // else
+                //     divDate.innerHTML = `<small>${min} — ${fmtDt(max)}</small>`;
+            }
 
             descrDiv.appendChild(divCaption);
             descrDiv.appendChild(divDate);
@@ -223,5 +268,52 @@ export class Main {
             
             docApi.addRow(interTr);
         }
+    }
+        
+    private _makeRowRef(curRef: ILineReference, mapping: time.Mapping<IDateFormat>): { clusters: IEventCluster<IDateFormat>[] } {
+        const clustersCount = 2, clusterWidthRnd = this._dims.mainTdWidth / clustersCount;
+        const tuneRnd = 0;
+
+        const clusters: IEventCluster<IDateFormat>[] = [];
+        const evtToClst = curRef.eventsToRender.map(e => null as ({} | null));
+
+        for (let ci = 0; ci < clustersCount; ci++) {
+            const
+                clLeftRnd = Math.floor(ci * clusterWidthRnd - tuneRnd),
+                clRightRnd = Math.ceil((ci + 1) * clusterWidthRnd + tuneRnd);
+            const events: IEvent<IDateFormat>[] = [];
+            const eventIndices: number[] = [];
+            let min: number | null = null, max: number | null = null, sum = 0;
+            for (let ei = 0; ei < curRef.eventsToRender.length; ei++) {
+                if (evtToClst[ei] !== null)
+                    continue;
+                const evt = curRef.eventsToRender[ei];
+                const evtTimeRnd = mapping.FromRealToRender(evt.time);
+                if (clLeftRnd <= evtTimeRnd && evtTimeRnd <= clRightRnd) {
+                    events.push(evt);
+                    eventIndices.push(ei);
+                    if (min === null || evt.time.val <= min)
+                        min = evt.time.val;
+                    if (max === null || evt.time.val >= max)
+                        max = evt.time.val;
+                    sum += evt.time.val;
+                }
+            }
+            if (events.length === 0)
+                continue;
+            const fmt = events[0].time.fmt;
+            const cluster: IEventCluster<IDateFormat> = {
+                events,
+                meanReal: Moment(fmt, sum / events.length),
+                minReal: Moment(fmt, min),
+                maxReal: Moment(fmt, max),
+            };
+            for (let ei of eventIndices) {
+                evtToClst[ei] = cluster;
+            }
+            clusters.push(cluster);
+        }
+
+        return { clusters };
     }
 }

@@ -1,10 +1,7 @@
 import { IDateFormat, IEvent, ILineSettings, Interval } from "./dtos";
 import { Main } from "./main";
 import all from "./data.json";
-
-function Throw(errorMessage?: string): never {
-    throw new Error(errorMessage);
-}
+import { Throw } from "./utils";
 
 const allEvents = all.events as IEvent<IDateFormat>[];
 

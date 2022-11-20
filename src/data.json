@@ -16,8 +16,23 @@
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Molino_neol%C3%ADtico_de_vaiv%C3%A9n.jpg/320px-Molino_neol%C3%ADtico_de_vaiv%C3%A9n.jpg"
 		},
 		{
-			"cpt": "Test",
+			"cpt": "Test A",
 			"time": { "fmt": "y", "val": -1000 },
+			"img": null
+		},
+		{
+			"cpt": "Test B",
+			"time": { "fmt": "y", "val": -900 },
+			"img": null
+		},
+		{
+			"cpt": "Test C",
+			"time": { "fmt": "y", "val": -800 },
+			"img": null
+		},
+		{
+			"cpt": "Test D",
+			"time": { "fmt": "y", "val": -700 },
 			"img": null
 		}
 	]
