@@ -1,6 +1,7 @@
-import { IDateFormat, IEvent, ILineSettings, IMoment, Interval, Moment } from './dtos';
-import * as time from './time';
-import { Throw } from './utils';
+import { IDateFormat, IEvent, ILineSettings, IMoment, Interval, Moment } from "./dtos";
+import * as time from "./time";
+import { Throw } from "./utils";
+import { StringUtils } from "./text";
 
 interface ILineReference {
     min: number;
@@ -25,7 +26,8 @@ interface IEventCluster<T extends IDateFormat> {
 type NumToStr = (n: number) => string;
 
 export class Main {
-    private _time = new time.Wizard;
+    private _time = new time.Wizard();
+    private _text = new StringUtils();
 
     private _palette = [
         "#abcdef",
@@ -164,14 +166,14 @@ export class Main {
 
             const divCaption = docApi.createElement("div");
             if (cluster.events.length === 1) {
-                divCaption.innerText = cluster.events[0].cpt;
+                divCaption.innerText = this._text.toString(cluster.events[0].cpt) ?? "Unknown event";
             } else {
                 const renderedCount = cluster.events.length > 4
                     ? 3
                     : cluster.events.length;
                 let captionHtml = cluster.events
                     .slice(0, renderedCount)
-                    .map(e => e.cpt)
+                    .map(e => this._text.toString(e.cpt) ?? "Unknown event")
                     .reduce((acc, add) => acc + ", " + add);
                 const extraCount = cluster.events.length - renderedCount;
                 if (extraCount > 0) {

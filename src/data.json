@@ -1,17 +1,17 @@
 {
 	"events": [
 		{
-			"cpt": "End-Triassic extinction",
+			"cpt": { "en": "End-Triassic extinction", "ru": "Триасово-юрское вымирание" },
 			"time": { "fmt": "my", "val": -201.3 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Coelophysis_bauri_-_IMG_0720.jpg/320px-Coelophysis_bauri_-_IMG_0720.jpg"
 		},
 		{
-			"cpt": "Cretaceous–Tertiary extinction",
+			"cpt": { "en": "Cretaceous–Tertiary extinction" },
 			"time": { "fmt": "my", "val": -66 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Chicxulub_impact_-_artist_impression.jpg/300px-Chicxulub_impact_-_artist_impression.jpg"
 		},
 		{
-			"cpt": "Neolithic Revolution",
+			"cpt": { "en": "Neolithic Revolution" },
 			"time": { "fmt": "y", "val": -10000 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Molino_neol%C3%ADtico_de_vaiv%C3%A9n.jpg/320px-Molino_neol%C3%ADtico_de_vaiv%C3%A9n.jpg"
 		},

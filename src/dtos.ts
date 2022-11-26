@@ -23,8 +23,10 @@ export interface ILineSettings {
     interval: IUniFmtInterval<IDateFormat>;
 }
 
+export type IMultiLangString = { [key: string]: string }
+
 export interface IEvent<T extends IDateFormat> {
-    cpt: string,
+    cpt: string | IMultiLangString,
     time: IMoment<T>,
     img: string,
 }
