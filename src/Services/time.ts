@@ -1,4 +1,4 @@
-import { IDateFormat, IUniFmtInterval, Interval, IMoment } from "./dtos";
+import { IDateFormat, IUniFmtInterval, Interval, IMoment } from "../dtos";
 
 function ThrowFmtNotSupported(): never { throw new Error("The given time format is not supported."); }
 

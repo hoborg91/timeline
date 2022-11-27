@@ -1,5 +1,5 @@
-import { IMultiLangString, IPlurString } from "./dtos";
-import allResources from "./resources.json";
+import { IMultiLangString, IPlurString } from "../dtos";
+import allResources from "../../data/resources.json";
 
 export interface ITextWizard {
     locResource(key: string, ...params: any[]): string;
