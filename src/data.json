@@ -1,12 +1,27 @@
 {
 	"events": [
 		{
+			"cpt": { "en": "Late Ordovician mass extinction", "ru": "Ордовикско-силурийское вымирание" },
+			"time": { "fmt": "my", "val": -445 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Ooland_baculite_Image0022_lo_res_3_x1_7.jpg"
+		},
+		{
+			"cpt": { "en": "Late Devonian extinction", "ru": "Девонское вымирание" },
+			"time": { "fmt": "my", "val": -374 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Kolihapeltis_01_Pengo.jpg/205px-Kolihapeltis_01_Pengo.jpg"
+		},
+		{
+			"cpt": { "en": "Great Dying", "ru": "Массовое пермское вымирание" },
+			"time": { "fmt": "my", "val": -251.9 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Permian-Triassic_boundary_at_Frazer_Beach%2C_NSW.jpg/180px-Permian-Triassic_boundary_at_Frazer_Beach%2C_NSW.jpg"
+		},
+		{
 			"cpt": { "en": "End-Triassic extinction", "ru": "Триасово-юрское вымирание" },
 			"time": { "fmt": "my", "val": -201.3 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Coelophysis_bauri_-_IMG_0720.jpg/320px-Coelophysis_bauri_-_IMG_0720.jpg"
 		},
 		{
-			"cpt": { "en": "Cretaceous–Tertiary extinction" },
+			"cpt": { "en": "Cretaceous–Tertiary extinction", "ru": "Мел-палеогеновое вымирание" },
 			"time": { "fmt": "my", "val": -66 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Chicxulub_impact_-_artist_impression.jpg/300px-Chicxulub_impact_-_artist_impression.jpg"
 		},

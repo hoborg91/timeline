@@ -134,71 +134,24 @@ export class Main {
             };
             const leftRel = (evt.timeVal - curRef.min) / curRef.len;
             const leftRender = leftRel * this._dims.mainTdWidth - 20; // TODO 20, 50 and so on - magic numbers. Refactor.
-            const evtDiv = docApi.createElement("div");
-            const borderCssVal = evt.img === undefined || evt.img === null || evt.img.length === 0
-                ? "2px solid white"
-                : "none";
-            evtDiv.style.cssText = `
-                border: ${borderCssVal};
-                width: 50px;
-                height: 50px;
-                left: ${leftRender}px;
-                top: 20px;
-                z-index: ${ci};
-                position: absolute;
-                background-image: url(${evt.img});
-                background-repeat: no-repeat;
-                background-size: 100%;
-            `;
+            
+            const evtDiv = this._rednerEvent(
+                ci,
+                cluster,
+                evt,
+                leftRender,
+                docApi
+            );
             td.appendChild(evtDiv);
             
-            const descrDiv = docApi.createElement("div");
-            
-            descrDiv.style.cssText = `
-                width: ${this._dims.descrBoxWidth}px;
-                height: ${this._dims.descrBoxHeight}px;
-                left: ${leftRender}px;
-                top: -60px;
-                z-index: ${ci};
-                position: absolute;
-                background-color: rgba(255, 255, 255, 0.5);
-            `;
-
-            const divCaption = docApi.createElement("div");
-            if (cluster.events.length === 1) {
-                divCaption.innerText = this._text.toString(cluster.events[0].cpt) ?? "Unknown event";
-            } else {
-                const renderedCount = cluster.events.length > 4
-                    ? 3
-                    : cluster.events.length;
-                let captionHtml = cluster.events
-                    .slice(0, renderedCount)
-                    .map(e => this._text.toString(e.cpt) ?? "Unknown event")
-                    .reduce((acc, add) => acc + ", " + add);
-                const extraCount = cluster.events.length - renderedCount;
-                if (extraCount > 0) {
-                    const txt = extraCount === 1
-                        ? " another event"
-                        : " other events";
-                    captionHtml += ` <i>and ${extraCount} ${txt}</i>`;
-                }
-                divCaption.innerHTML = captionHtml;
-            }
-
-            const divDate = docApi.createElement("div");
-            if (cluster.events.length === 1) {
-                divDate.innerHTML = `<small>${fmtDt(evt.timeVal)}</small>`;
-            } else {
-                // const min = cluster.minReal.val, max = cluster.maxReal.val;
-                // if (min * max < 0)
-                    divDate.innerHTML = `<small>${fmtDt(cluster.minReal.val)} — ${fmtDt(cluster.maxReal.val)}</small>`;
-                // else
-                //     divDate.innerHTML = `<small>${min} — ${fmtDt(max)}</small>`;
-            }
-
-            descrDiv.appendChild(divCaption);
-            descrDiv.appendChild(divDate);
-
+            const descrDiv = this._renderDescription(
+                ci,
+                cluster,
+                evt,
+                leftRender,
+                fmtDt,
+                docApi
+            );
             td.appendChild(descrDiv);
         }
     
@@ -215,6 +168,116 @@ export class Main {
         tr.appendChild(tdRight);
         
         docApi.addRow(tr);
+    }
+
+    private _rednerEvent(
+        ci: number,
+        cluster: IEventCluster<IDateFormat>,
+        evt: { timeVal: number, img: string | null },
+        leftRender: number,
+        docApi: IDocApi
+    ): HTMLElement {
+        const evtDiv = docApi.createElement("div");
+
+        let ei = 0, images = 0;
+        for (let e of cluster.events) {
+            if (e.img === undefined || e.img === null)
+                continue;
+            images++;
+            if (images > 3)
+                break;
+            //const eDiv = docApi.createElement("div");
+            //.style.cssText =
+            const eImg = docApi.createElement("img");
+            eImg.setAttribute("src", e.img);
+            eImg.style.cssText = `
+                height: 50px;
+            `;
+
+            evtDiv.appendChild(eImg);
+
+            ei++;
+        }
+
+        // const borderCssVal = evt.img === undefined || evt.img === null || evt.img.length === 0
+        //     ? "2px solid white"
+        //     : "none";
+        // evtDiv.style.cssText = `
+        //     border: ${borderCssVal};
+        //     width: 50px;
+        //     height: 50px;
+        //     left: ${leftRender}px;
+        //     top: 20px;
+        //     z-index: ${ci};
+        //     position: absolute;
+        //     background-image: url(${evt.img});
+        //     background-repeat: no-repeat;
+        //     background-size: 100%;
+        // `;
+        evtDiv.style.cssText = `
+            left: ${leftRender}px;
+            top: 20px;
+            z-index: ${ci};
+            position: absolute;
+        `;
+        return evtDiv;
+    }
+
+    private _renderDescription(
+        ci: number,
+        cluster: IEventCluster<IDateFormat>,
+        evt: { timeVal: number, img: string | null },
+        leftRender: number,
+        fmtDt: NumToStr,
+        docApi: IDocApi
+    ): HTMLElement {
+        const descrDiv = docApi.createElement("div");
+            
+        descrDiv.style.cssText = `
+            width: ${this._dims.descrBoxWidth}px;
+            left: ${leftRender}px;
+            top: -60px;
+            z-index: ${ci};
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.5);
+        `;
+
+        const divCaption = docApi.createElement("div");
+        if (cluster.events.length === 1) {
+            divCaption.innerText = this._text.toString(cluster.events[0].cpt) ?? "Unknown event";
+        } else {
+            const renderedCount = cluster.events.length > 4
+                ? 3
+                : cluster.events.length;
+            let captionHtml = cluster.events
+                .slice(0, renderedCount)
+                .map(e => this._text.toString(e.cpt) ?? "Unknown event")
+                .reduce((acc, add) => acc + ", " + add);
+            const extraCount = cluster.events.length - renderedCount;
+            if (extraCount > 0) {
+                const txt = extraCount === 1
+                    ? " another event"
+                    : " other events";
+                captionHtml += ` <i>and ${extraCount} ${txt}</i>`;
+            }
+            divCaption.innerHTML = captionHtml;
+        }
+
+        const divDate = docApi.createElement("div");
+        if (cluster.events.length === 1) {
+            divDate.innerHTML = `<small>${fmtDt(evt.timeVal)}</small>`;
+        } else {
+            // const min = cluster.minReal.val, max = cluster.maxReal.val;
+            // if (min * max < 0)
+                divDate.innerHTML = `<small>${fmtDt(cluster.minReal.val)} — ${fmtDt(cluster.maxReal.val)}</small>`;
+            // else
+            //     divDate.innerHTML = `<small>${min} — ${fmtDt(max)}</small>`;
+        }
+
+        descrDiv.appendChild(divCaption);
+        descrDiv.appendChild(divDate);
+
+        return descrDiv;
     }
 
     private _renderInterRow(
@@ -273,7 +336,7 @@ export class Main {
     }
         
     private _makeRowRef(curRef: ILineReference, mapping: time.Mapping<IDateFormat>): { clusters: IEventCluster<IDateFormat>[] } {
-        const clustersCount = 2, clusterWidthRnd = this._dims.mainTdWidth / clustersCount;
+        const clustersCount = 3, clusterWidthRnd = this._dims.mainTdWidth / clustersCount;
         const tuneRnd = 0;
 
         const clusters: IEventCluster<IDateFormat>[] = [];

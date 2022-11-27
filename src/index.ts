@@ -8,7 +8,7 @@ const allEvents = all.events as IEvent<IDateFormat>[];
 const table = document.getElementById(`timeline-table`) ?? Throw("Cannot find the container.");
 
 const lineSettings: ILineSettings[] = [
-	{ interval: Interval("my", -250, 1) },
+	{ interval: Interval("my", -500, 1) },
 	{ interval: Interval("y", -50000, 10000) },
 ];
 
