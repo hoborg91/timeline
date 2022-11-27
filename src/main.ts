@@ -1,6 +1,6 @@
 import { IDateFormat, IEvent, ILineSettings, IMoment, Interval, Moment } from "./dtos";
 import * as time from "./time";
-import { StringUtils } from "./text";
+import { ITextWizard } from "./text";
 
 interface ILineReference {
     min: number;
@@ -25,8 +25,8 @@ interface IEventCluster<T extends IDateFormat> {
 type NumToStr = (n: number) => string;
 
 export class Main {
-    private _time = new time.Wizard();
-    private _text = new StringUtils();
+    private _time: time.ITimeWizard;
+    private _text: ITextWizard;
 
     private _palette = [
         "#abcdef",
@@ -50,6 +50,11 @@ export class Main {
         my: (time: number) => time >= 0 ? this._text.locResource("_my", time) : this._text.locResource("_mybce", -time),
         y: (time: number) => time >= 0 ? this._text.locResource("_y", time) : this._text.locResource("_ybce", -time)
     };
+
+    constructor(timeWizard: time.ITimeWizard, textWizard: ITextWizard) {
+        this._time = timeWizard;
+        this._text = textWizard;
+    }
 
     public Render(
         lineSettings: ILineSettings[],

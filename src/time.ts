@@ -2,7 +2,15 @@ import { IDateFormat, IUniFmtInterval, Interval, IMoment } from "./dtos";
 
 function ThrowFmtNotSupported(): never { throw new Error("The given time format is not supported."); }
 
-export class Wizard {
+export interface ITimeWizard {
+    GetIntersection<T1 extends IDateFormat, T2 extends IDateFormat>(
+        int1: IUniFmtInterval<T1>,
+        int2: IUniFmtInterval<T2>
+    )
+        : { isc1: IUniFmtInterval<T1>, isc2: IUniFmtInterval<T2> } | "No intersection";
+}
+
+export class TimeWizard implements ITimeWizard{
     private _yFactor(withFmt: IUniFmtInterval<IDateFormat>): number | never {
         if (withFmt.fmt == "y")
             return 1;

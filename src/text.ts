@@ -1,14 +1,19 @@
 import { IMultiLangString, IPlurString } from "./dtos";
 import allResources from "./resources.json";
 
-export class StringUtils {
+export interface ITextWizard {
+    locResource(key: string, ...params: any[]): string;
+    toString(str: string | IMultiLangString, ...params: any[]): string;
+}
+
+export class StringUtils implements ITextWizard {
     private _langs: string[];
     private _allTexts: { key: string, loc: IMultiLangString }[];
 
-    constructor() {
+    constructor(preferredLanguages: readonly string[]) {
         this._langs = [];
         let enAdded = false, enUsAdded = false;
-        for (let loc of navigator.languages) {
+        for (let loc of preferredLanguages) {
             this._langs.push(loc);
             if (loc === "en")
                 enAdded = true;
@@ -21,6 +26,17 @@ export class StringUtils {
             this._langs.push("en-US");
             
         this._allTexts = allResources.texts;
+    }
+
+    locResource(key: string, ...params: any[]): string {
+        const recs = this._allTexts.filter(r => r.key === key);
+        if (recs.length === 0)
+            throw new Error(`Cannot find a resource text with key "${key}".`);
+        if (recs.length > 1)
+            throw new Error(`There are more than one resource text with key "${key}".`);
+        const resourceLoc = recs[0].loc;
+        const result = this.toString(resourceLoc, params);
+        return result;
     }
 
     toString(str: string | IMultiLangString, ...params: any[]): string {
@@ -61,16 +77,5 @@ export class StringUtils {
         }
 
         throw new Error("The given text provides no suitable localizations.");
-    }
-
-    locResource(key: string, ...params: any[]): string {
-        const recs = this._allTexts.filter(r => r.key === key);
-        if (recs.length === 0)
-            throw new Error(`Cannot find a resource text with key "${key}".`);
-        if (recs.length > 1)
-            throw new Error(`There are more than one resource text with key "${key}".`);
-        const resourceLoc = recs[0].loc;
-        const result = this.toString(resourceLoc, params);
-        return result;
     }
 }

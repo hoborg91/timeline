@@ -2,6 +2,8 @@ import { IDateFormat, IEvent, ILineSettings, Interval } from "./dtos";
 import { Main } from "./main";
 import all from "./data.json";
 import { Throw } from "./utils";
+import { TimeWizard } from "./time";
+import { StringUtils } from "./text";
 
 const allEvents = all.events as IEvent<IDateFormat>[];
 
@@ -12,7 +14,10 @@ const lineSettings: ILineSettings[] = [
 	{ interval: Interval("y", -50000, 10000) },
 ];
 
-new Main().Render(
+new Main(
+    new TimeWizard(),
+    new StringUtils(navigator.languages)
+).Render(
     lineSettings,
     allEvents,
     {
