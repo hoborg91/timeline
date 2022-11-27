@@ -1,6 +1,5 @@
 import { IDateFormat, IEvent, ILineSettings, IMoment, Interval, Moment } from "./dtos";
 import * as time from "./time";
-import { Throw } from "./utils";
 import { StringUtils } from "./text";
 
 interface ILineReference {
@@ -48,8 +47,8 @@ export class Main {
     private _dateFormatters: {
         [K in IDateFormat]: NumToStr;
     } = {
-        my: (time: number) => time >= 0 ? `${time} m. y.` : `${-time} m. y. ago`,
-        y: (time: number) => time >= 0 ? `${time} y.` : `${-time} y. BCE`,
+        my: (time: number) => time >= 0 ? this._text.locResource("_my", time) : this._text.locResource("_mybce", -time),
+        y: (time: number) => time >= 0 ? this._text.locResource("_y", time) : this._text.locResource("_ybce", -time)
     };
 
     public Render(
@@ -244,21 +243,18 @@ export class Main {
 
         const divCaption = docApi.createElement("div");
         if (cluster.events.length === 1) {
-            divCaption.innerText = this._text.toString(cluster.events[0].cpt) ?? "Unknown event";
+            divCaption.innerText = this._text.toString(cluster.events[0].cpt) ?? this._text.locResource("unkevt");
         } else {
             const renderedCount = cluster.events.length > 4
                 ? 3
                 : cluster.events.length;
             let captionHtml = cluster.events
                 .slice(0, renderedCount)
-                .map(e => this._text.toString(e.cpt) ?? "Unknown event")
+                .map(e => this._text.toString(e.cpt) ?? this._text.locResource("unkevt"))
                 .reduce((acc, add) => acc + ", " + add);
             const extraCount = cluster.events.length - renderedCount;
             if (extraCount > 0) {
-                const txt = extraCount === 1
-                    ? " another event"
-                    : " other events";
-                captionHtml += ` <i>and ${extraCount} ${txt}</i>`;
+                captionHtml += ` <i>${this._text.locResource("otherevts", extraCount)}</i>`;
             }
             divCaption.innerHTML = captionHtml;
         }
@@ -336,7 +332,7 @@ export class Main {
     }
         
     private _makeRowRef(curRef: ILineReference, mapping: time.Mapping<IDateFormat>): { clusters: IEventCluster<IDateFormat>[] } {
-        const clustersCount = 3, clusterWidthRnd = this._dims.mainTdWidth / clustersCount;
+        const clustersCount = 2, clusterWidthRnd = this._dims.mainTdWidth / clustersCount;
         const tuneRnd = 0;
 
         const clusters: IEventCluster<IDateFormat>[] = [];
