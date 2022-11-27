@@ -1,4 +1,4 @@
-import { IMultiLangString } from "./dtos";
+import { IMultiLangString, IPlurString } from "./dtos";
 import allResources from "./resources.json";
 
 export class StringUtils {
@@ -24,18 +24,29 @@ export class StringUtils {
     }
 
     toString(str: string | IMultiLangString, ...params: any[]): string {
-        const strNoParams = this.toStringNoParams(str);
+        let strNoParams = this.toStringNoParams(str);
+        if (typeof strNoParams !== "string") {
+            strNoParams = this.selectPluralForm(strNoParams, params);
+        }
         let result = strNoParams;
         for (let pi = 0; pi < params.length; pi++) {
             const reg = new RegExp("\\{" + pi + "\\}", "gi");
             result = result.replace(reg, params[pi]);
         }
         // TODO Check all parameters are substituted.
-        // TODO Support plural forms or switch to a normal loc. library.
         return result;
     }
 
-    private toStringNoParams(str: string | IMultiLangString): string {
+    private selectPluralForm(plural: IPlurString, ...params: any[]): string {
+        const switchValue = params[plural.paramIndex];
+        for (let option of plural.options) {
+            if (option.from <= switchValue && switchValue <= option.till)
+                return option.val;
+        }
+        return plural.default;
+    }
+
+    private toStringNoParams(str: string | IMultiLangString): string | IPlurString {
         if (typeof str === "string")
             return str;
 

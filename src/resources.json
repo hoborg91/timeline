@@ -38,8 +38,15 @@
 		{
 			"key": "otherevts",
 			"loc": {
-				"en": "and {0} other event(s)",
-				"ru": "и ещё {0} событий"
+				"en": "and {0} other events",
+				"ru": {
+					"paramIndex": 0,
+					"options": [
+						{ "from": 1, "till": 1, "val": "и ещё {0} событие" },
+						{ "from": 2, "till": 4, "val": "и ещё {0} события" }
+					],
+					"default": "и ещё {0} событий"
+				}
 			}
 		}
 	]

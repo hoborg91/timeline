@@ -23,7 +23,13 @@ export interface ILineSettings {
     interval: IUniFmtInterval<IDateFormat>;
 }
 
-export type IMultiLangString = { [key: string]: string }
+export interface IPlurString {
+    paramIndex: number;
+    options: { from: number; till: number; val: string }[];
+    default: string;
+}
+
+export type IMultiLangString = { [key: string]: string | IPlurString }
 
 export interface IEvent<T extends IDateFormat> {
     cpt: string | IMultiLangString,
