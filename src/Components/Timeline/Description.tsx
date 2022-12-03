@@ -1,7 +1,7 @@
 import React from "react";
-import { Context } from "../context";
-import { IDateFormat } from "../dtos";
-import { IEventCluster, NumToStr } from "./ifaces";
+import { Context } from "../../context";
+import { IDateFormat, IMoment } from "../../contracts/timeline";
+import { IEventCluster, NumToStr } from "../ifaces";
 
 const _dims = {
     mainTdWidth: 600,
@@ -36,24 +36,24 @@ const Caption = ({ cluster }: {
     return <div>{mainPart} <i>{extraPart}</i></div>;
 }
 
-const Date = ({ cluster, evt, fmtDt }: {
+const Date = ({ cluster, evt }: {
     cluster: IEventCluster<IDateFormat>,
-    evt: { timeVal: number, img: string | null },
-    fmtDt: NumToStr,
+    evt: { timeVal: number, img: string | null, timeMoment: IMoment<IDateFormat> },
 }) => {
+    const ctx = React.useContext(Context);
+
     if (cluster.events.length === 1) {
-        return <div><small>{fmtDt(evt.timeVal)}</small></div>;
+        return <div><small>{ctx.timeFormatter.format(evt.timeMoment)}</small></div>;
     }
 
-    return <div><small>{fmtDt(cluster.minReal.val)} — {fmtDt(cluster.maxReal.val)}</small></div>;
+    return <div><small>{ctx.timeFormatter.format(cluster.interval)}</small></div>;
 }
 
-export const Description = ({ci, cluster, evt, leftRender, fmtDt}: {
+export const Description = ({ci, cluster, evt, leftRender }: {
     ci: number,
     cluster: IEventCluster<IDateFormat>,
-    evt: { timeVal: number, img: string | null },
+    evt: { timeVal: number, img: string | null, timeMoment: IMoment<IDateFormat> },
     leftRender: number,
-    fmtDt: NumToStr,
 }) => {        
     const style = {
         width: _dims.descrBoxWidth + "px",
@@ -66,6 +66,6 @@ export const Description = ({ci, cluster, evt, leftRender, fmtDt}: {
 
     return <div style={style}>
         <Caption cluster={cluster} />
-        <Date cluster={cluster} evt={evt} fmtDt={fmtDt} />
+        <Date cluster={cluster} evt={evt} />
     </div>;
 }

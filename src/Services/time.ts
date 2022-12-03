@@ -1,8 +1,10 @@
-import { IDateFormat, IUniFmtInterval, Interval, IMoment } from "../dtos";
+import { IDateFormat, IUniFmtInterval, Interval, IMoment } from "../contracts/timeline";
 
 function ThrowFmtNotSupported(): never { throw new Error("The given time format is not supported."); }
 
 export interface ITimeWizard {
+    Contains(interval: IUniFmtInterval<IDateFormat>, moment: IMoment<IDateFormat>): boolean;
+
     GetIntersection<T1 extends IDateFormat, T2 extends IDateFormat>(
         int1: IUniFmtInterval<T1>,
         int2: IUniFmtInterval<T2>
@@ -11,12 +13,26 @@ export interface ITimeWizard {
 }
 
 export class TimeWizard implements ITimeWizard{
-    private _yFactor(withFmt: IUniFmtInterval<IDateFormat>): number | never {
+    private _yFactor(withFmt: IUniFmtInterval<IDateFormat> | IMoment<IDateFormat>): number | never {
         if (withFmt.fmt == "y")
             return 1;
         if (withFmt.fmt == "my")
             return 1000 * 1000;
         ThrowFmtNotSupported();
+    }
+
+    public Contains(interval: IUniFmtInterval<IDateFormat>, moment: IMoment<IDateFormat>): boolean {
+        if ([interval.fmt, moment.fmt]
+            .filter(fmt => fmt !== "y" && fmt !== "my")
+            .length > 0)
+            ThrowFmtNotSupported();
+
+        const
+            from = (interval.fromVal as number) * this._yFactor(interval),
+            till = (interval.tillVal as number) * this._yFactor(interval),
+            mmnt = (moment.val as number) * this._yFactor(moment);
+
+        return from <= mmnt && mmnt <= till;
     }
     
     public GetIntersection<T1 extends IDateFormat, T2 extends IDateFormat>(
@@ -36,8 +52,12 @@ export class TimeWizard implements ITimeWizard{
             int2from = (int2.fromVal as number) * this._yFactor(int2),
             int2till = (int2.tillVal as number) * this._yFactor(int2);
 
-        if (int1from > int2till || int1till < int2from)
+        //console.log(`GetIntersection(${int1from}, ${int1till}, ${int2from}, ${int2till})...`);
+
+        if (int1from > int2till || int1till < int2from) {
+            //console.log("No intersection");
             return "No intersection";
+        }
 
         const isc = (from: number, till: number) => ({
             isc1: Interval(int1.fmt, from / this._yFactor(int1), till / this._yFactor(int1)),

@@ -1,13 +1,13 @@
 import React from "react";
 import all from "../data/data.json";
-import { Settings } from "./Components/Settings";
-import { TimeLine } from "./Components/Timeline";
-import { IDateFormat, IEvent, ILineSettings, Interval } from "./dtos";
+import { Settings } from "./Components/Settings/Settings";
+import { TimeLine } from "./Components/Timeline/Timeline";
+import { IDateFormat, IEvent, ILineSettings, LineSettings } from "./contracts/timeline";
 
 export const App = () => {
     const [lineSettings, setLineSettings] = React.useState([
-        { interval: Interval("my", -500, 1) },
-        { interval: Interval("y", -50000, 10000) },
+        LineSettings("#abcdef", "my", -14000, -4000),
+        LineSettings("#efcdab", "my", -5000, 1),
     ] as ILineSettings[]);
     const allEvents = all.events as IEvent<IDateFormat>[];
 

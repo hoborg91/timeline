@@ -1,54 +1,123 @@
 {
 	"events": [
 		{
+			"cpt": { "en": "Big Bang", "ru": "Большой взрыв" },
+			"time": { "fmt": "my", "val": -13800 },
+			"scal": { "fmt": "my", "val": 1000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Ilc_9yr_moll4096.png/320px-Ilc_9yr_moll4096.png"
+		},
+		{
+			"cpt": { "en": "Dark Ages", "ru": "Тёмные века" },
+			"time": { "fmt": "my", "val": -13500 },
+			"scal": { "fmt": "my", "val": 1000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Mean_void_imprint.png"
+		},
+		{
+			"cpt": { "en": "Reionization", "ru": "Реионизация" },
+			"time": { "fmt": "my", "val": -13200 },
+			"scal": { "fmt": "my", "val": 1000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/M82_HST_ACS_2006-14-a-large_web.jpg/308px-M82_HST_ACS_2006-14-a-large_web.jpg?uselang=ru"
+		},
+		{
+			"cpt": { "en": "Primeval galaxies", "ru": "Первобытные галактики" },
+			"time": { "fmt": "my", "val": -12800 },
+			"scal": { "fmt": "my", "val": 1000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Stellar_Fireworks_Finale.jpg/303px-Stellar_Fireworks_Finale.jpg?uselang=ru"
+		},
+		{
+			"cpt": { "en": "Milky Way`s buldge and halo formation", "ru": "Формирование балджа и гало Млечного пути" },
+			"time": { "fmt": "my", "val": -10000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Artist%27s_impression_of_the_central_bulge_of_the_Milky_Way.jpg/320px-Artist%27s_impression_of_the_central_bulge_of_the_Milky_Way.jpg"
+		},
+		{
+			"cpt": { "en": "Milky Way`s disc formation", "ru": "Формирование диска Млечного пути" },
+			"time": { "fmt": "my", "val": -8000 },
+			"scal": { "fmt": "my", "val": 1000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Artist%E2%80%99s_impression_of_the_Milky_Way.jpg/240px-Artist%E2%80%99s_impression_of_the_Milky_Way.jpg?uselang=ru"
+		},
+		{
+			"cpt": { "en": "Collapse of the solar molecular cloud", "ru": "Коллапс солнечного молекулярного облака" },
+			"time": { "fmt": "my", "val": -4600 },
+			"scal": { "fmt": "my", "val": 1000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/The_Mysterious_Case_of_the_Disappearing_Dust.jpg/320px-The_Mysterious_Case_of_the_Disappearing_Dust.jpg"
+		},
+		{
+			"cpt": { "en": "Formation of the first planets in the Solar System", "ru": "Формирование первых планет Солнечной системы" },
+			"time": { "fmt": "my", "val": -4550 },
+			"scal": { "fmt": "my", "val": 1000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Protoplanetary_disk.jpg?uselang=ru"
+		},
+		{
+			"cpt": { "en": "Planetary differentiation and formation of geomagnetic field", "ru": "Гравитационная дифференциация и формирование магнитного поля" },
+			"time": { "fmt": "my", "val": -4500 },
+			"scal": { "fmt": "my", "val": 1000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Dynamo_Theory_-_Outer_core_convection_and_magnetic_field_geenration.svg/240px-Dynamo_Theory_-_Outer_core_convection_and_magnetic_field_geenration.svg.png"
+		},
+		{
+			"cpt": { "en": "Microbial mats", "ru": "Цианобактерии" },
+			"time": { "fmt": "my", "val": -3480 },
+			"scal": { "fmt": "my", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/c/c0/Stromatolites.jpg?uselang=ru"
+		},
+		{
+			"cpt": "Diskagma",
+			"time": { "fmt": "my", "val": -2200 },
+			"scal": { "fmt": "my", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Diskagma_butonii.jpg/320px-Diskagma_butonii.jpg"
+		},
+		{
+			"cpt": { "en": "Great Oxidation Event", "ru": "Кислородная катастрофа" },
+			"time": { "fmt": "my", "val": -2000 },
+			"scal": { "fmt": "my", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Top_of_Atmosphere.jpg/320px-Top_of_Atmosphere.jpg"
+		},
+		{
 			"cpt": { "en": "Late Ordovician mass extinction", "ru": "Ордовикско-силурийское вымирание" },
 			"time": { "fmt": "my", "val": -445 },
+			"scal": { "fmt": "my", "val": 10 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Ooland_baculite_Image0022_lo_res_3_x1_7.jpg"
 		},
 		{
 			"cpt": { "en": "Late Devonian extinction", "ru": "Девонское вымирание" },
 			"time": { "fmt": "my", "val": -374 },
+			"scal": { "fmt": "my", "val": 10 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Kolihapeltis_01_Pengo.jpg/205px-Kolihapeltis_01_Pengo.jpg"
 		},
 		{
 			"cpt": { "en": "Great Dying", "ru": "Массовое пермское вымирание" },
 			"time": { "fmt": "my", "val": -251.9 },
+			"scal": { "fmt": "my", "val": 10 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Permian-Triassic_boundary_at_Frazer_Beach%2C_NSW.jpg/180px-Permian-Triassic_boundary_at_Frazer_Beach%2C_NSW.jpg"
 		},
 		{
 			"cpt": { "en": "End-Triassic extinction", "ru": "Триасово-юрское вымирание" },
 			"time": { "fmt": "my", "val": -201.3 },
+			"scal": { "fmt": "my", "val": 10 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Coelophysis_bauri_-_IMG_0720.jpg/320px-Coelophysis_bauri_-_IMG_0720.jpg"
 		},
 		{
 			"cpt": { "en": "Cretaceous–Tertiary extinction", "ru": "Мел-палеогеновое вымирание" },
 			"time": { "fmt": "my", "val": -66 },
+			"scal": { "fmt": "my", "val": 10 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Chicxulub_impact_-_artist_impression.jpg/300px-Chicxulub_impact_-_artist_impression.jpg"
 		},
 		{
-			"cpt": { "en": "Neolithic Revolution" },
+			"cpt": { "en": "Fire", "ru": "Огонь" },
+			"time": { "fmt": "y", "val": -1000000 },
+			"scal": { "fmt": "y", "val": 10000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/%D0%9F%D0%B8%D0%BE%D0%BD%D0%B5%D1%80%D1%81%D0%BA%D0%B8%D0%B9_%D0%BA%D0%BE%D1%81%D1%82%D0%B5%D1%80_-_panoramio.jpg/320px-%D0%9F%D0%B8%D0%BE%D0%BD%D0%B5%D1%80%D1%81%D0%BA%D0%B8%D0%B9_%D0%BA%D0%BE%D1%81%D1%82%D0%B5%D1%80_-_panoramio.jpg"
+		},
+		{
+			"cpt": { "en": "Neolithic Revolution", "ru": "Неолитическая революция" },
 			"time": { "fmt": "y", "val": -10000 },
+			"scal": { "fmt": "y", "val": 1000 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Molino_neol%C3%ADtico_de_vaiv%C3%A9n.jpg/320px-Molino_neol%C3%ADtico_de_vaiv%C3%A9n.jpg"
 		},
 		{
-			"cpt": "Test A",
-			"time": { "fmt": "y", "val": -1000 },
-			"img": null
-		},
-		{
-			"cpt": "Test B",
-			"time": { "fmt": "y", "val": -900 },
-			"img": null
-		},
-		{
-			"cpt": "Test C",
-			"time": { "fmt": "y", "val": -800 },
-			"img": null
-		},
-		{
-			"cpt": "Test D",
-			"time": { "fmt": "y", "val": -700 },
-			"img": null
+			"cpt": { "en": "Wheel", "ru": "Колесо" },
+			"time": { "fmt": "y", "val": -5000 },
+			"scal": { "fmt": "y", "val": 1000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Ljubljana_Marshes_Wheel_with_axle_%28oldest_wooden_wheel_yet_discovered%29.jpg/314px-Ljubljana_Marshes_Wheel_with_axle_%28oldest_wooden_wheel_yet_discovered%29.jpg"
 		}
 	]
 }

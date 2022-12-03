@@ -1,7 +1,7 @@
 import React from "react";
-import { Context } from "../context";
-import { ILineSettings, Interval } from "../dtos";
-import { ILineReference } from "./ifaces";
+import { Context } from "../../context";
+import { ILineSettings, Interval } from "../../contracts/timeline";
+import { ILineReference } from "../ifaces";
 
 const _dims = {
     mainTdWidth: 600,
@@ -31,7 +31,7 @@ export const InterLine = ({ lineSettings, lsi, refe }: {
     );
 
     if (intersection === "No intersection") {
-        return <tr><td></td><td>---</td><td></td></tr>;
+        return <tr><td></td><td style={{ height: "100px" }}></td><td></td></tr>;
     }
 
     const

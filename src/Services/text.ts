@@ -1,4 +1,4 @@
-import { IMultiLangString, IPlurString } from "../dtos";
+import { IMultiLangString, IPlurString } from "../contracts/text";
 import allResources from "../../data/resources.json";
 
 export interface ITextWizard {
@@ -35,7 +35,7 @@ export class StringUtils implements ITextWizard {
         if (recs.length > 1)
             throw new Error(`There are more than one resource text with key "${key}".`);
         const resourceLoc = recs[0].loc;
-        const result = this.toString(resourceLoc, params);
+        const result = this.toString(resourceLoc, ...params);
         return result;
     }
 
@@ -47,10 +47,26 @@ export class StringUtils implements ITextWizard {
         let result = strNoParams;
         for (let pi = 0; pi < params.length; pi++) {
             const reg = new RegExp("\\{" + pi + "\\}", "gi");
-            result = result.replace(reg, params[pi]);
+            const paramStr = this.locValue(params[pi]);
+            result = result.replace(reg, paramStr);
         }
-        // TODO Check all parameters are substituted.
+        if (new RegExp("\\{" + "\\d+" + "\\}", "gi").test(result))
+            throw new Error(`No enough parameter values for text "${strNoParams}".`);
         return result;
+    }
+
+    private locValue(val: any) {
+        const tryToLocaleString = (typeof val.toLocaleString === "function");
+        for (const lng of this._langs) {
+            try {
+                if (tryToLocaleString)
+                    return val.toLocaleString(lng);
+            } catch {}
+        }
+
+        return typeof val.toString === "function"
+            ? val.toString()
+            : val;
     }
 
     private selectPluralForm(plural: IPlurString, ...params: any[]): string {
