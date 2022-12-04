@@ -4,20 +4,13 @@ import { Context } from "../../context";
 import { IDateFormat, ILineSettings, IUniFmtInterval, LineSettings } from "../../contracts/timeline";
 import { LineSettingsComponent } from "./LineSettingsComponent";
 import { BsCheckCircle, BsXCircle } from "react-icons/bs";
+import allPalette from "../../../data/palette.json";
 
 const newKey = () => Math.floor(Math.random() * 1000 * 1000);
 
 const maxLinesCount = 10;
 
-const _palette = [
-    "#abcdef",
-    "#efcdab",
-    "#cdabef",
-    "#cdefab",
-    "#efabab",
-    "#abefab",
-    "#ababef",
-];
+const _palette = allPalette.standard as string[];
 
 export const Settings = ({ currentSettings, apply }: {
     currentSettings: ILineSettings[],

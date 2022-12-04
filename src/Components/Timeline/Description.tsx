@@ -3,13 +3,6 @@ import { Context } from "../../context";
 import { IDateFormat, IMoment } from "../../contracts/timeline";
 import { IEventCluster, NumToStr } from "../ifaces";
 
-const _dims = {
-    mainTdWidth: 600,
-    mainTdHeight: 100,
-    descrBoxWidth: 150,
-    descrBoxHeight: 50,
-};
-
 const Caption = ({ cluster }: {
     cluster: IEventCluster<IDateFormat>,
 }) => {
@@ -43,6 +36,7 @@ const Date = ({ cluster, evt }: {
     const ctx = React.useContext(Context);
 
     if (cluster.events.length === 1) {
+        //console.log(cluster.events[0].cpt);
         return <div><small>{ctx.timeFormatter.format(evt.timeMoment)}</small></div>;
     }
 
@@ -54,9 +48,11 @@ export const Description = ({ci, cluster, evt, leftRender }: {
     cluster: IEventCluster<IDateFormat>,
     evt: { timeVal: number, img: string | null, timeMoment: IMoment<IDateFormat> },
     leftRender: number,
-}) => {        
+}) => {
+    const dims = React.useContext(Context).dimensions;
+
     const style = {
-        width: _dims.descrBoxWidth + "px",
+        width: dims.descrBoxWidth + "px",
         left: leftRender + "px",
         top: "-60px",
         zIndex: ci,

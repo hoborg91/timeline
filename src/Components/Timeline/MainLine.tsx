@@ -4,21 +4,14 @@ import { Mapping } from "../../Services/time";
 import { Description } from "./Description";
 import { IEventCluster, ILineReference } from "../ifaces";
 import { Event } from "./Event";
-import { Context } from "../../context";
+import { Context, IDimensions } from "../../context";
 
-const _dims = {
-    mainTdWidth: 600,
-    mainTdHeight: 100,
-    descrBoxWidth: 150,
-    descrBoxHeight: 50,
-};
-
-function _makeRowRef(curRef: ILineReference, mapping: Mapping<IDateFormat>): { 
+function _makeRowRef(curRef: ILineReference, mapping: Mapping<IDateFormat>, dims: IDimensions): { 
     clusters: IEventCluster<IDateFormat>[] 
 } {
     // TODO 1. Refactor this (clustersCount may not be an appropriate way to determine clusters).
     // TODO 2. Order events in cluster. Well, order all collections everywhere if possible.
-    const clustersCount = 2, clusterWidthRnd = _dims.mainTdWidth / clustersCount;
+    const clustersCount = 4, clusterWidthRnd = dims.mainTdWidth / clustersCount;
     const tuneRnd = 0;
 
     const clusters: IEventCluster<IDateFormat>[] = [];
@@ -59,6 +52,11 @@ function _makeRowRef(curRef: ILineReference, mapping: Mapping<IDateFormat>): {
         for (let ei of eventIndices) {
             evtToClst[ei] = cluster;
         }
+        // console.log(`=== Cluster (${cluster.minReal}-${cluster.meanReal}-${cluster.maxReal}, ${cluster.events.length} events) ===`);
+        // for (const e of cluster.events) {
+        //     console.log(`(${e.time.val})`);
+        // }
+
         clusters.push(cluster);
     }
 
@@ -70,8 +68,8 @@ export const MainLine = ({ lineSettings, lsi, curRef }:
 ) => {
     const ctx = React.useContext(Context);
     const ls = lineSettings[lsi];
-    const mapping = new Mapping(_dims.mainTdWidth, ls.interval);
-    const rowRef = _makeRowRef(curRef, mapping);
+    const mapping = new Mapping(ctx.dimensions.mainTdWidth, ls.interval);
+    const rowRef = _makeRowRef(curRef, mapping, ctx.dimensions);
 
     const evtTsxs = [];
     
@@ -80,10 +78,10 @@ export const MainLine = ({ lineSettings, lsi, curRef }:
         const evt = {
             timeVal: cluster.meanReal.val as number,
             img: cluster.events.length === 1 ? cluster.events[0].img : null,
-            timeMoment: Moment("y", 1),
+            timeMoment: Moment(cluster.interval.fmt, cluster.meanReal.val),
         };
         const leftRel = (evt.timeVal - curRef.min) / curRef.len;
-        const leftRender = leftRel * _dims.mainTdWidth - 20; // TODO 20, 50 and so on - magic numbers. Refactor.
+        const leftRender = leftRel * ctx.dimensions.mainTdWidth - 20; // TODO 20, 50 and so on - magic numbers. Refactor.
         
         evtTsxs.push(<Event
             cluster={cluster}
@@ -98,14 +96,20 @@ export const MainLine = ({ lineSettings, lsi, curRef }:
 
     const style = {
         backgroundColor: curRef.mainColor,
-        width: _dims.mainTdWidth + "px",
-        height: _dims.mainTdHeight + "px",
+        width: ctx.dimensions.mainTdWidth + "px",
+        height: ctx.dimensions.mainTdHeight + "px",
         position: "relative" as const,
     };
     
     return <tr>
-        <td style={{ textAlign: "right" }}>{ctx.timeFormatter.format(curRef.minMoment)}</td>
-        <td style={style}>{evtTsxs}</td>
-        <td>{ctx.timeFormatter.format(curRef.maxMoment)}</td>
+        <td style={{ textAlign: "right", width: ctx.dimensions.sideTdWidth + "px" }}>
+            {ctx.timeFormatter.format(curRef.minMoment)}
+        </td>
+        <td style={style}>
+            {evtTsxs}
+        </td>
+        <td style={{ width: ctx.dimensions.sideTdWidth + "px" }}>
+            {ctx.timeFormatter.format(curRef.maxMoment)}
+        </td>
     </tr>;
 }

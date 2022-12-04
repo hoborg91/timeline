@@ -1,0 +1,11 @@
+{
+    "standard": [
+        "#abcdef",
+        "#efcdab",
+        "#cdabef",
+        "#cdefab",
+        "#efabab",
+        "#abefab",
+        "#ababef"
+    ]
+}

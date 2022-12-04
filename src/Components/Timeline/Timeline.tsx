@@ -1,12 +1,10 @@
 import React from "react";
 import { Context } from "../../context";
 import { ITimeWizard } from "../../Services/time"
-import { IDateFormat, IEvent, ILineSettings, IMoment, IUniFmtInterval, Moment } from "../../contracts/timeline";
+import { IDateFormat, IEvent, ILineSettings, Moment } from "../../contracts/timeline";
 import { Throw } from "../../utils";
-import { ILineReference, NumToStr } from "../ifaces";
 import { InterLine } from "./InterLine";
 import { MainLine } from "./MainLine";
-import { ITextWizard } from "../../Services/text";
 
 function _makeRef(
     lineSettings: ILineSettings[],

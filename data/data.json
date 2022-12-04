@@ -7,7 +7,7 @@
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Ilc_9yr_moll4096.png/320px-Ilc_9yr_moll4096.png"
 		},
 		{
-			"cpt": { "en": "Dark Ages", "ru": "Тёмные века" },
+			"cpt": { "en": "Cosmic Dark Ages", "ru": "Космические Тёмные века" },
 			"time": { "fmt": "my", "val": -13500 },
 			"scal": { "fmt": "my", "val": 1000 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Mean_void_imprint.png"
@@ -16,13 +16,13 @@
 			"cpt": { "en": "Reionization", "ru": "Реионизация" },
 			"time": { "fmt": "my", "val": -13200 },
 			"scal": { "fmt": "my", "val": 1000 },
-			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/M82_HST_ACS_2006-14-a-large_web.jpg/308px-M82_HST_ACS_2006-14-a-large_web.jpg?uselang=ru"
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/M82_HST_ACS_2006-14-a-large_web.jpg/308px-M82_HST_ACS_2006-14-a-large_web.jpg"
 		},
 		{
 			"cpt": { "en": "Primeval galaxies", "ru": "Первобытные галактики" },
 			"time": { "fmt": "my", "val": -12800 },
 			"scal": { "fmt": "my", "val": 1000 },
-			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Stellar_Fireworks_Finale.jpg/303px-Stellar_Fireworks_Finale.jpg?uselang=ru"
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Stellar_Fireworks_Finale.jpg/303px-Stellar_Fireworks_Finale.jpg"
 		},
 		{
 			"cpt": { "en": "Milky Way`s buldge and halo formation", "ru": "Формирование балджа и гало Млечного пути" },
@@ -33,7 +33,7 @@
 			"cpt": { "en": "Milky Way`s disc formation", "ru": "Формирование диска Млечного пути" },
 			"time": { "fmt": "my", "val": -8000 },
 			"scal": { "fmt": "my", "val": 1000 },
-			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Artist%E2%80%99s_impression_of_the_Milky_Way.jpg/240px-Artist%E2%80%99s_impression_of_the_Milky_Way.jpg?uselang=ru"
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Artist%E2%80%99s_impression_of_the_Milky_Way.jpg/240px-Artist%E2%80%99s_impression_of_the_Milky_Way.jpg"
 		},
 		{
 			"cpt": { "en": "Collapse of the solar molecular cloud", "ru": "Коллапс солнечного молекулярного облака" },
@@ -45,7 +45,7 @@
 			"cpt": { "en": "Formation of the first planets in the Solar System", "ru": "Формирование первых планет Солнечной системы" },
 			"time": { "fmt": "my", "val": -4550 },
 			"scal": { "fmt": "my", "val": 1000 },
-			"img": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Protoplanetary_disk.jpg?uselang=ru"
+			"img": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Protoplanetary_disk.jpg"
 		},
 		{
 			"cpt": { "en": "Planetary differentiation and formation of geomagnetic field", "ru": "Гравитационная дифференциация и формирование магнитного поля" },
@@ -57,7 +57,7 @@
 			"cpt": { "en": "Microbial mats", "ru": "Цианобактерии" },
 			"time": { "fmt": "my", "val": -3480 },
 			"scal": { "fmt": "my", "val": 100 },
-			"img": "https://upload.wikimedia.org/wikipedia/commons/c/c0/Stromatolites.jpg?uselang=ru"
+			"img": "https://upload.wikimedia.org/wikipedia/commons/c/c0/Stromatolites.jpg"
 		},
 		{
 			"cpt": "Diskagma",
@@ -66,10 +66,28 @@
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Diskagma_butonii.jpg/320px-Diskagma_butonii.jpg"
 		},
 		{
+			"cpt": { "en": "Francevillian biota", "ru": "Франсвильская биота" },
+			"time": { "fmt": "my", "val": -2100 },
+			"scal": { "fmt": "my", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Gabonionta_II.jpg/320px-Gabonionta_II.jpg"
+		},
+		{
 			"cpt": { "en": "Great Oxidation Event", "ru": "Кислородная катастрофа" },
 			"time": { "fmt": "my", "val": -2000 },
 			"scal": { "fmt": "my", "val": 100 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Top_of_Atmosphere.jpg/320px-Top_of_Atmosphere.jpg"
+		},
+		{
+			"cpt": { "en": "Trilobites", "ru": "Трилобиты" },
+			"time": { "fmt": "my", "val": -521 },
+			"scal": { "fmt": "my", "val": 10 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Megalaspides_01.jpg/320px-Megalaspides_01.jpg"
+		},
+		{
+			"cpt": { "en": "Haikouichthys", "ru": "Хайкоуихтис" },
+			"time": { "fmt": "my", "val": -518 },
+			"scal": { "fmt": "my", "val": 10 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Haikouichthys_NT.jpg"
 		},
 		{
 			"cpt": { "en": "Late Ordovician mass extinction", "ru": "Ордовикско-силурийское вымирание" },
@@ -78,10 +96,28 @@
 			"img": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Ooland_baculite_Image0022_lo_res_3_x1_7.jpg"
 		},
 		{
+			"cpt": { "en": "Eusthenopteron", "ru": "Эустеноптероны" },
+			"time": { "fmt": "my", "val": -385 },
+			"scal": { "fmt": "my", "val": 10 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/2/24/Eusthenopteron_BW.jpg"
+		},
+		{
 			"cpt": { "en": "Late Devonian extinction", "ru": "Девонское вымирание" },
 			"time": { "fmt": "my", "val": -374 },
 			"scal": { "fmt": "my", "val": 10 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Kolihapeltis_01_Pengo.jpg/205px-Kolihapeltis_01_Pengo.jpg"
+		},
+		{
+			"cpt": { "en": "Acanthostega", "ru": "Акантостега" },
+			"time": { "fmt": "my", "val": -365 },
+			"scal": { "fmt": "my", "val": 10 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Acanthostega_BW.jpg"
+		},
+		{
+			"cpt": { "en": "Seymouriamorpha", "ru": "Сеймуриаморфы" },
+			"time": { "fmt": "my", "val": -318 },
+			"scal": { "fmt": "my", "val": 10 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Seymouria1.jpg/320px-Seymouria1.jpg"
 		},
 		{
 			"cpt": { "en": "Great Dying", "ru": "Массовое пермское вымирание" },
@@ -90,10 +126,34 @@
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Permian-Triassic_boundary_at_Frazer_Beach%2C_NSW.jpg/180px-Permian-Triassic_boundary_at_Frazer_Beach%2C_NSW.jpg"
 		},
 		{
+			"cpt": { "en": "Dinosaurs", "ru": "Динозавры" },
+			"time": { "fmt": "my", "val": -240 },
+			"scal": { "fmt": "my", "val": 10 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Macronaria_scrubbed_enh.jpg/320px-Macronaria_scrubbed_enh.jpg"
+		},
+		{
 			"cpt": { "en": "End-Triassic extinction", "ru": "Триасово-юрское вымирание" },
 			"time": { "fmt": "my", "val": -201.3 },
 			"scal": { "fmt": "my", "val": 10 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Coelophysis_bauri_-_IMG_0720.jpg/320px-Coelophysis_bauri_-_IMG_0720.jpg"
+		},
+		{
+			"cpt": { "en": "Morganucodon", "ru": "Морганукодон" },
+			"time": { "fmt": "my", "val": -200 },
+			"scal": { "fmt": "my", "val": 10 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Morganucodon.jpg/320px-Morganucodon.jpg"
+		},
+		{
+			"cpt": { "en": "Archaeopteryx", "ru": "Археоптерикс" },
+			"time": { "fmt": "my", "val": -150 },
+			"scal": { "fmt": "my", "val": 10 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Archaeopteryx_NT.jpg"
+		},
+		{
+			"cpt": { "en": "Amborella", "ru": "Амборелла" },
+			"time": { "fmt": "my", "val": -130 },
+			"scal": { "fmt": "my", "val": 10 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Amborella_trichopoda_%283173820625%29.jpg/180px-Amborella_trichopoda_%283173820625%29.jpg"
 		},
 		{
 			"cpt": { "en": "Cretaceous–Tertiary extinction", "ru": "Мел-палеогеновое вымирание" },
@@ -102,10 +162,28 @@
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Chicxulub_impact_-_artist_impression.jpg/300px-Chicxulub_impact_-_artist_impression.jpg"
 		},
 		{
+			"cpt": { "en": "Darwinius", "ru": "Darwinius masillae" },
+			"time": { "fmt": "my", "val": -47 },
+			"scal": { "fmt": "my", "val": 10 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Darwiniusfig-s62cropped.jpg/170px-Darwiniusfig-s62cropped.jpg"
+		},
+		{
+			"cpt": { "en": "Homo habilis", "ru": "Человек умелый" },
+			"time": { "fmt": "y", "val": -2000000 },
+			"scal": { "fmt": "y", "val": 10000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Homo_habilis_in_Kulturama.jpg/196px-Homo_habilis_in_Kulturama.jpg"
+		},
+		{
 			"cpt": { "en": "Fire", "ru": "Огонь" },
 			"time": { "fmt": "y", "val": -1000000 },
 			"scal": { "fmt": "y", "val": 10000 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/%D0%9F%D0%B8%D0%BE%D0%BD%D0%B5%D1%80%D1%81%D0%BA%D0%B8%D0%B9_%D0%BA%D0%BE%D1%81%D1%82%D0%B5%D1%80_-_panoramio.jpg/320px-%D0%9F%D0%B8%D0%BE%D0%BD%D0%B5%D1%80%D1%81%D0%BA%D0%B8%D0%B9_%D0%BA%D0%BE%D1%81%D1%82%D0%B5%D1%80_-_panoramio.jpg"
+		},
+		{
+			"cpt": { "en": "Early modern human", "ru": "Человек разумный" },
+			"time": { "fmt": "y", "val": -200000 },
+			"scal": { "fmt": "y", "val": 10000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Human.svg/193px-Human.svg.png"
 		},
 		{
 			"cpt": { "en": "Neolithic Revolution", "ru": "Неолитическая революция" },
@@ -114,10 +192,118 @@
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Molino_neol%C3%ADtico_de_vaiv%C3%A9n.jpg/320px-Molino_neol%C3%ADtico_de_vaiv%C3%A9n.jpg"
 		},
 		{
+			"cpt": { "en": "Metallurgy", "ru": "Металлургия" },
+			"time": { "fmt": "y", "val": -5500 },
+			"scal": { "fmt": "y", "val": 1000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/HMB_Keltengrab_M%C3%BCnsingen-Rain_Grab_91.jpg/320px-HMB_Keltengrab_M%C3%BCnsingen-Rain_Grab_91.jpg"
+		},
+		{
 			"cpt": { "en": "Wheel", "ru": "Колесо" },
 			"time": { "fmt": "y", "val": -5000 },
 			"scal": { "fmt": "y", "val": 1000 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Ljubljana_Marshes_Wheel_with_axle_%28oldest_wooden_wheel_yet_discovered%29.jpg/314px-Ljubljana_Marshes_Wheel_with_axle_%28oldest_wooden_wheel_yet_discovered%29.jpg"
+		},
+		{
+			"cpt": { "en": "Writing", "ru": "Письменность" },
+			"time": { "fmt": "y", "val": -3500 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Tableta_con_trillo.png"
+		},
+		{
+			"cpt": { "en": "Buddhism", "ru": "Буддизм" },
+			"time": { "fmt": "y", "val": -500 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Four_Scenes_from_the_Life_of_the_Buddha_-_Enlightenment_-_Kushan_dynasty%2C_late_2nd_to_early_3rd_century_AD%2C_Gandhara%2C_schist_-_Freer_Gallery_of_Art_-_DSC05124.JPG/320px-thumbnail.jpg"
+		},
+		{
+			"cpt": { "en": "Christianity", "ru": "Христианство" },
+			"time": { "fmt": "y", "val": 1 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Chartres2006_039.jpg/303px-Chartres2006_039.jpg"
+		},
+		{
+			"cpt": { "en": "Deposition of Romulus Augustus", "ru": "Переворот Одоакра" },
+			"time": { "fmt": "y", "val": 476 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/6/68/Young_Folks%27_History_of_Rome_illus420.png"
+		},
+		{
+			"cpt": { "en": "Writing", "ru": "Ислам" },
+			"time": { "fmt": "y", "val": 610 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/The_Ka%27ba%2C_Great_Mosque_of_Mecca%2C_Saudi_Arabia_%284%29.jpg/320px-The_Ka%27ba%2C_Great_Mosque_of_Mecca%2C_Saudi_Arabia_%284%29.jpg"
+		},
+		{
+			"cpt": { "en": "Firearm", "ru": "Огнестрельное оружие" },
+			"time": { "fmt": "y", "val": 1250 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Yuan_chinese_gun.jpg/320px-Yuan_chinese_gun.jpg"
+		},
+		{
+			"cpt": { "en": "Fall of Constantinople", "ru": "Падение Константинополя" },
+			"time": { "fmt": "y", "val": 1453 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/THE_FALL_OF_CONSTANTINOPLE%2C_ITALY%2C_PROBABLY_VENICE%2C_LATE_15THEARLY_16TH_CENTURY._Private_coll..jpg/320px-THE_FALL_OF_CONSTANTINOPLE%2C_ITALY%2C_PROBABLY_VENICE%2C_LATE_15THEARLY_16TH_CENTURY._Private_coll..jpg"
+		},
+		{
+			"cpt": { "en": "Discovery to the Americas", "ru": "Открытие Америки" },
+			"time": { "fmt": "y", "val": 1492 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Landing_of_Columbus_%282%29.jpg/320px-Landing_of_Columbus_%282%29.jpg"
+		},
+		{
+			"cpt": { "en": "Eighty Years' War", "ru": "Восьмидесятилетняя война" },
+			"time": { "fmt": "y", "val": 1566 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Battle_of_Gibraltar_1607.jpg/320px-Battle_of_Gibraltar_1607.jpg"
+		},
+		{
+			"cpt": { "en": "French Revolution", "ru": "Революция во Франции" },
+			"time": { "fmt": "y", "val": 1789 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Prise_de_la_Bastille.jpg/320px-Prise_de_la_Bastille.jpg"
+		},
+		{
+			"cpt": { "en": "Vaccination", "ru": "Вакцинация" },
+			"time": { "fmt": "y", "val": 1791 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Dr_Jenner_performing_his_first_vaccination%2C_1796_Wellcome_M0000144.jpg/320px-Dr_Jenner_performing_his_first_vaccination%2C_1796_Wellcome_M0000144.jpg"
+		},
+		{
+			"cpt": { "en": "Steam locomotive", "ru": "Паровоз" },
+			"time": { "fmt": "y", "val": 1789 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/7/78/Killingworth-locomotive.jpg"
+		},
+		{
+			"cpt": { "en": "Russian Revolution", "ru": "Революция в России" },
+			"time": { "fmt": "y", "val": 1917 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Avrora1917Petrograd.jpg/318px-Avrora1917Petrograd.jpg"
+		},
+		{
+			"cpt": { "en": "Antibiotic", "ru": "Антибиотики" },
+			"time": { "fmt": "y", "val": 1928 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Staphylococcus_aureus_%28AB_Test%29.jpg/265px-Staphylococcus_aureus_%28AB_Test%29.jpg"
+		},
+		{
+			"cpt": { "en": "Transistor", "ru": "Транзистор" },
+			"time": { "fmt": "y", "val": 1947 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Replica-of-first-transistor.jpg"
+		},
+		{
+			"cpt": { "en": "Human spaceflight", "ru": "Пилотируемый космический полёт" },
+			"time": { "fmt": "y", "val": 1961 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Vostok-1-musee-du-Bourget-P.jpg/320px-Vostok-1-musee-du-Bourget-P.jpg"
+		},
+		{
+			"cpt": { "en": "Collapse of the Eastern Bloc", "ru": "Распад Восточного блока" },
+			"time": { "fmt": "y", "val": 1991 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/ru/thumb/7/7e/%D0%A2%D0%B0%D0%BD%D0%BA%D0%B8_%D0%BD%D0%B0_%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B9_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D0%B8_1991_%D0%B3%D0%BE%D0%B4.jpg/320px-%D0%A2%D0%B0%D0%BD%D0%BA%D0%B8_%D0%BD%D0%B0_%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B9_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D0%B8_1991_%D0%B3%D0%BE%D0%B4.jpg"
 		}
 	]
 }
