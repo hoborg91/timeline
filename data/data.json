@@ -271,7 +271,7 @@
 		},
 		{
 			"cpt": { "en": "Steam locomotive", "ru": "Паровоз" },
-			"time": { "fmt": "y", "val": 1789 },
+			"time": { "fmt": "y", "val": 1814 },
 			"scal": { "fmt": "y", "val": 100 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/7/78/Killingworth-locomotive.jpg"
 		},

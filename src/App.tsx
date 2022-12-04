@@ -8,13 +8,20 @@ import allPalette from "../data/palette.json";
 const _palette = allPalette.standard as string[];
 
 export const App = () => {
+    let colorIndex = 0;
+    const color = () => {
+        const result = _palette[colorIndex % _palette.length];
+        colorIndex++;
+        return result;
+    }
     const [lineSettings, setLineSettings] = React.useState([
-        LineSettings(_palette[0 % _palette.length], "my", -14000, 1),
-        LineSettings(_palette[1 % _palette.length], "my", -4000, 1),
-        LineSettings(_palette[2 % _palette.length], "y", -2000000, 2000),
-        LineSettings(_palette[3 % _palette.length], "y", -1000, 2000),
-        LineSettings(_palette[4 % _palette.length], "y", 1400, 2000),
-        LineSettings(_palette[5 % _palette.length], "y", 1900, 2000),
+        LineSettings(color(), "my", -14000, 1),
+        LineSettings(color(), "my", -4000, 1),
+        LineSettings(color(), "my", -600, 1),
+        LineSettings(color(), "y", -2000000, 2000),
+        LineSettings(color(), "y", -1000, 2000),
+        LineSettings(color(), "y", 1400, 2000),
+        LineSettings(color(), "y", 1900, 2000),
     ] as ILineSettings[]);
     const allEvents = all.events as IEvent<IDateFormat>[];
 

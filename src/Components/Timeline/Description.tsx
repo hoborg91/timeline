@@ -1,4 +1,5 @@
 import React from "react";
+import { Button, OverlayTrigger, Popover } from "react-bootstrap";
 import { Context } from "../../context";
 import { IDateFormat, IMoment } from "../../contracts/timeline";
 import { IEventCluster, NumToStr } from "../ifaces";
@@ -26,7 +27,19 @@ const Caption = ({ cluster }: {
         extraPart = `${ctx.text.locResource("otherevts", extraCount)}`;
     }
 
-    return <div>{mainPart} <i>{extraPart}</i></div>;
+    const popover = (
+        <Popover>
+            <Popover.Body>
+                <ul>
+                    {cluster.events.map(e => <li>{ctx.text.toString(e.cpt) ?? ctx.text.locResource("unkevt")} ({ctx.timeFormatter.format(e.time)})</li>)}
+                </ul>
+            </Popover.Body>
+        </Popover>
+    );
+
+    return <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+        <div>{mainPart} <i>{extraPart}</i></div>
+    </OverlayTrigger>;
 }
 
 const Date = ({ cluster, evt }: {
