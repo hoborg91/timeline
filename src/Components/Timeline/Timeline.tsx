@@ -104,7 +104,9 @@ export const TimeLine = ({ lineSettings, allEvents }: {
         )
         .flat();
 
-    return <table>{trTsxs}</table>;
+    const tableWidth = ctx.dimensions.mainTdWidth + ctx.dimensions.sideTdWidth * 2;
+
+    return <table style={{ width: tableWidth + "px" }}>{trTsxs}</table>;
 }
 
 

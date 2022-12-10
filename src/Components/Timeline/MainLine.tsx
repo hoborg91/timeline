@@ -6,12 +6,24 @@ import { IEventCluster, ILineReference } from "../ifaces";
 import { Event } from "./Event";
 import { Context, IDimensions } from "../../context";
 
-function _makeRowRef(curRef: ILineReference, mapping: Mapping<IDateFormat>, dims: IDimensions): { 
+function _clusterSettings(dims: IDimensions) {
+    let clustersCount: number, clusterWidthRnd: number;
+    clusterWidthRnd = 200;
+    clustersCount = Math.floor(dims.mainTdWidth / clusterWidthRnd);
+    clusterWidthRnd = dims.mainTdWidth / clustersCount;
+    return { clustersCount, clusterWidthRnd };
+}
+
+function _makeRowRef(
+    curRef: ILineReference,
+    mapping: Mapping<IDateFormat>,
+    dims: IDimensions
+): { 
     clusters: IEventCluster<IDateFormat>[] 
 } {
     // TODO 1. Refactor this (clustersCount may not be an appropriate way to determine clusters).
     // TODO 2. Order events in cluster. Well, order all collections everywhere if possible.
-    const clustersCount = 4, clusterWidthRnd = dims.mainTdWidth / clustersCount;
+    const { clustersCount, clusterWidthRnd } = _clusterSettings(dims);
     const tuneRnd = 0;
 
     const clusters: IEventCluster<IDateFormat>[] = [];
@@ -81,7 +93,11 @@ export const MainLine = ({ lineSettings, lsi, curRef }:
             timeMoment: Moment(cluster.interval.fmt, cluster.meanReal.val),
         };
         const leftRel = (evt.timeVal - curRef.min) / curRef.len;
-        const leftRender = leftRel * ctx.dimensions.mainTdWidth - 20; // TODO 20, 50 and so on - magic numbers. Refactor.
+        let leftRender = leftRel * ctx.dimensions.mainTdWidth - 20;
+        if (leftRender < 0)
+            leftRender = 0;
+        if (leftRender > ctx.dimensions.mainTdWidth - 50)
+            leftRender = ctx.dimensions.mainTdWidth - 50;
         
         evtTsxs.push(<Event
             cluster={cluster}

@@ -25,12 +25,12 @@
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Stellar_Fireworks_Finale.jpg/303px-Stellar_Fireworks_Finale.jpg"
 		},
 		{
-			"cpt": { "en": "Milky Way`s buldge and halo formation", "ru": "Формирование балджа и гало Млечного пути" },
+			"cpt": { "en": "Milky Way`s buldge and halo", "ru": "Балдж и гало Млечного пути" },
 			"time": { "fmt": "my", "val": -10000 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Artist%27s_impression_of_the_central_bulge_of_the_Milky_Way.jpg/320px-Artist%27s_impression_of_the_central_bulge_of_the_Milky_Way.jpg"
 		},
 		{
-			"cpt": { "en": "Milky Way`s disc formation", "ru": "Формирование диска Млечного пути" },
+			"cpt": { "en": "Milky Way`s disc", "ru": "Диск Млечного пути" },
 			"time": { "fmt": "my", "val": -8000 },
 			"scal": { "fmt": "my", "val": 1000 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Artist%E2%80%99s_impression_of_the_Milky_Way.jpg/240px-Artist%E2%80%99s_impression_of_the_Milky_Way.jpg"
@@ -42,13 +42,13 @@
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/The_Mysterious_Case_of_the_Disappearing_Dust.jpg/320px-The_Mysterious_Case_of_the_Disappearing_Dust.jpg"
 		},
 		{
-			"cpt": { "en": "Formation of the first planets in the Solar System", "ru": "Формирование первых планет Солнечной системы" },
+			"cpt": { "en": "Planets in the Solar System", "ru": "Планеты Солнечной системы" },
 			"time": { "fmt": "my", "val": -4550 },
 			"scal": { "fmt": "my", "val": 1000 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Protoplanetary_disk.jpg"
 		},
 		{
-			"cpt": { "en": "Planetary differentiation and formation of geomagnetic field", "ru": "Гравитационная дифференциация и формирование магнитного поля" },
+			"cpt": { "en": "Planetary differentiation and geomagnetic field", "ru": "Гравитационная дифференциация и магнитное поле" },
 			"time": { "fmt": "my", "val": -4500 },
 			"scal": { "fmt": "my", "val": 1000 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Dynamo_Theory_-_Outer_core_convection_and_magnetic_field_geenration.svg/240px-Dynamo_Theory_-_Outer_core_convection_and_magnetic_field_geenration.svg.png"
