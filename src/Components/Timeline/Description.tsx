@@ -1,30 +1,39 @@
 import React from "react";
-import { Button, OverlayTrigger, Popover } from "react-bootstrap";
+import { OverlayTrigger, Popover } from "react-bootstrap";
 import { Context } from "../../context";
 import { IDateFormat, IMoment } from "../../contracts/timeline";
-import { IEventCluster, NumToStr } from "../ifaces";
+import { IEventCluster } from "../ifaces";
 
-const Caption = ({ cluster }: {
+const Caption = ({ cluster, leftRender }: {
     cluster: IEventCluster<IDateFormat>,
+    leftRender: number,
 }) => {
     const ctx = React.useContext(Context);
 
     if (cluster.events.length === 1) {
-        const text  = ctx.text.toString(cluster.events[0].cpt) ?? ctx.text.locResource("unkevt");
-        return <div>{text}</div>;
+        const evt = cluster.events[0];
+        const text  = ctx.text.toString(evt.cpt) ?? ctx.text.locResource("unkevt");
+        return <div>{text}<br /><small>{ctx.timeFormatter.format(evt.time)}</small></div>;
     }
 
-    const renderedCount = cluster.events.length > 4
-        ? 3
-        : cluster.events.length;
-    const mainPart = cluster.events
-        .slice(0, renderedCount)
-        .map(e => ctx.text.toString(e.cpt) ?? ctx.text.locResource("unkevt"))
-        .reduce((acc, add) => acc + ", " + add);
+    let mainPart = null as string | null;
+    let maxEventsCount = 4, renderedCount = 0;
+    for (; maxEventsCount > 0 && (mainPart === null || mainPart.length > 60); maxEventsCount--) {
+        renderedCount = cluster.events.length > maxEventsCount
+            ? (maxEventsCount - 1)
+            : cluster.events.length;
+        mainPart = cluster.events
+            .slice(0, renderedCount)
+            .map(e => ctx.text.toString(e.cpt) ?? ctx.text.locResource("unkevt"))
+            .reduce((acc, add) => acc + ", " + add);
+    }
+    
     let extraPart = "";
     const extraCount = cluster.events.length - renderedCount;
     if (extraCount > 0) {
-        extraPart = `${ctx.text.locResource("otherevts", extraCount)}`;
+        extraPart = renderedCount > 0
+            ? `${ctx.text.locResource("and_otherevts", extraCount)}`
+            : `${ctx.text.locResource("_evts", extraCount)}`;
     }
 
     const popover = (
@@ -37,7 +46,11 @@ const Caption = ({ cluster }: {
         </Popover>
     );
 
-    return <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+    const placement = leftRender <= ctx.dimensions.mainTdWidth / 2
+        ? "right"
+        : "left";
+
+    return <OverlayTrigger trigger="click" placement={placement} overlay={popover}>
         <div>{mainPart} <i>{extraPart}</i></div>
     </OverlayTrigger>;
 }
@@ -49,32 +62,33 @@ const Date = ({ cluster, evt }: {
     const ctx = React.useContext(Context);
 
     if (cluster.events.length === 1) {
-        //console.log(cluster.events[0].cpt);
         return <div><small>{ctx.timeFormatter.format(evt.timeMoment)}</small></div>;
     }
 
     return <div><small>{ctx.timeFormatter.format(cluster.interval)}</small></div>;
 }
 
-export const Description = ({ci, cluster, evt, leftRender }: {
+export const Description = ({ci, cluster, evt, leftRender, descrWidthRedner }: {
     ci: number,
     cluster: IEventCluster<IDateFormat>,
     evt: { timeVal: number, img: string | null, timeMoment: IMoment<IDateFormat> },
     leftRender: number,
+    descrWidthRedner: number,
 }) => {
     const dims = React.useContext(Context).dimensions;
-
+    console.log({ leftRender, descrWidthRedner });
     const style = {
-        width: dims.descrBoxWidth + "px",
+        maxWidth: descrWidthRedner/*dims.descrBoxWidth*/ + "px",
         left: leftRender + "px",
         top: "-60px",
         zIndex: ci,
         position: "absolute" as const,
         backgroundColor: "rgba(255, 255, 255, 0.5)",
+        wordWrap: "break-word" as const,
     };
 
     return <div style={style}>
-        <Caption cluster={cluster} />
-        <Date cluster={cluster} evt={evt} />
+        <Caption cluster={cluster} leftRender={leftRender} />
+        {/* <Date cluster={cluster} evt={evt} /> */}
     </div>;
 }

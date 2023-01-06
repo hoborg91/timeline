@@ -8,7 +8,7 @@ import { Context, IDimensions } from "../../context";
 
 function _clusterSettings(dims: IDimensions) {
     let clustersCount: number, clusterWidthRnd: number;
-    clusterWidthRnd = 200;
+    clusterWidthRnd = 240;
     clustersCount = Math.floor(dims.mainTdWidth / clusterWidthRnd);
     clusterWidthRnd = dims.mainTdWidth / clustersCount;
     return { clustersCount, clusterWidthRnd };
@@ -19,10 +19,10 @@ function _makeRowRef(
     mapping: Mapping<IDateFormat>,
     dims: IDimensions
 ): { 
-    clusters: IEventCluster<IDateFormat>[] 
+    clusters: IEventCluster<IDateFormat>[],
+    clusterWidthRnd: number,
 } {
     // TODO 1. Refactor this (clustersCount may not be an appropriate way to determine clusters).
-    // TODO 2. Order events in cluster. Well, order all collections everywhere if possible.
     const { clustersCount, clusterWidthRnd } = _clusterSettings(dims);
     const tuneRnd = 0;
 
@@ -53,6 +53,7 @@ function _makeRowRef(
         }
         if (events.length === 0)
             continue;
+        events.sort((a, b) => a.time.val - b.time.val);
         const fmt = events[0].time.fmt;
         const cluster: IEventCluster<IDateFormat> = {
             events,
@@ -64,15 +65,11 @@ function _makeRowRef(
         for (let ei of eventIndices) {
             evtToClst[ei] = cluster;
         }
-        // console.log(`=== Cluster (${cluster.minReal}-${cluster.meanReal}-${cluster.maxReal}, ${cluster.events.length} events) ===`);
-        // for (const e of cluster.events) {
-        //     console.log(`(${e.time.val})`);
-        // }
 
         clusters.push(cluster);
     }
 
-    return { clusters };
+    return { clusters, clusterWidthRnd };
 }
 
 export const MainLine = ({ lineSettings, lsi, curRef }: 
@@ -107,6 +104,7 @@ export const MainLine = ({ lineSettings, lsi, curRef }:
             cluster={cluster}
             evt={evt}
             leftRender={leftRender}
+            descrWidthRedner={rowRef.clusterWidthRnd}
             ci={ci} />)
     }
 

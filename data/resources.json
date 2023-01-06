@@ -92,7 +92,21 @@
 			}
 		},
 		{
-			"key": "otherevts",
+			"key": "_evts",
+			"loc": {
+				"en": "{0} events",
+				"ru": {
+					"paramIndex": 0,
+					"options": [
+						{ "from": 1, "till": 1, "val": "{0} событие" },
+						{ "from": 2, "till": 4, "val": "{0} события" }
+					],
+					"default": "{0} событий"
+				}
+			}
+		},
+		{
+			"key": "and_otherevts",
 			"loc": {
 				"en": "and {0} other events",
 				"ru": {
