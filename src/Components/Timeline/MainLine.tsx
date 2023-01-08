@@ -5,10 +5,11 @@ import { Description } from "./Description";
 import { IEventCluster, ILineReference } from "../ifaces";
 import { Event } from "./Event";
 import { Context, IDimensions } from "../../context";
+import { ClusterAndDescr } from "./ClusterAndDescr";
 
 function _clusterSettings(dims: IDimensions) {
     let clustersCount: number, clusterWidthRnd: number;
-    clusterWidthRnd = 240;
+    clusterWidthRnd = dims.descrBoxWidth;
     clustersCount = Math.floor(dims.mainTdWidth / clusterWidthRnd);
     clusterWidthRnd = dims.mainTdWidth / clustersCount;
     return { clustersCount, clusterWidthRnd };
@@ -60,7 +61,8 @@ function _makeRowRef(
             meanReal: Moment(fmt, sum / events.length),
             minReal: Moment(fmt, min),
             maxReal: Moment(fmt, max),
-            interval: Interval(fmt, min, max),
+            intervalReal: Interval(fmt, min, max),
+            scopeRender: { min: clLeftRnd, max: clRightRnd },
         };
         for (let ei of eventIndices) {
             evtToClst[ei] = cluster;
@@ -76,6 +78,7 @@ export const MainLine = ({ lineSettings, lsi, curRef }:
     { lineSettings: ILineSettings[], lsi: number, curRef: ILineReference }
 ) => {
     const ctx = React.useContext(Context);
+    const dims = ctx.dimensions;
     const ls = lineSettings[lsi];
     const mapping = new Mapping(ctx.dimensions.mainTdWidth, ls.interval);
     const rowRef = _makeRowRef(curRef, mapping, ctx.dimensions);
@@ -87,25 +90,38 @@ export const MainLine = ({ lineSettings, lsi, curRef }:
         const evt = {
             timeVal: cluster.meanReal.val as number,
             img: cluster.events.length === 1 ? cluster.events[0].img : null,
-            timeMoment: Moment(cluster.interval.fmt, cluster.meanReal.val),
+            timeMoment: Moment(cluster.intervalReal.fmt, cluster.meanReal.val),
         };
-        const leftRel = (evt.timeVal - curRef.min) / curRef.len;
-        let leftRender = leftRel * ctx.dimensions.mainTdWidth - 20;
-        if (leftRender < 0)
-            leftRender = 0;
-        if (leftRender > ctx.dimensions.mainTdWidth - 50)
-            leftRender = ctx.dimensions.mainTdWidth - 50;
-        
-        evtTsxs.push(<Event
-            cluster={cluster}
-            leftRender={leftRender}
-            ci={ci} />);
-        evtTsxs.push(<Description
-            cluster={cluster}
-            evt={evt}
-            leftRender={leftRender}
-            descrWidthRedner={rowRef.clusterWidthRnd}
-            ci={ci} />)
+        const centreRel = (evt.timeVal - curRef.min) / curRef.len;
+
+        // {
+        //     const centreRnd = centreRel * dims.mainTdWidth;
+        //     const leftRnd = centreRnd > 50 ? centreRnd - 50 : 0;
+        //     //let leftRender = leftRel * (dims.wholeTableWidh - dims.descrBoxWidth) - dims.sideTdWidth;
+        //     // if (leftRender < 0)
+        //     //     leftRender = 0;
+        //     // if (leftRender > ctx.dimensions.mainTdWidth - 50)
+        //     //     leftRender = ctx.dimensions.mainTdWidth - 50;
+            
+        //     evtTsxs.push(<Event
+        //         cluster={cluster}
+        //         leftRender={leftRnd}
+        //         ci={ci} />);
+        // }
+
+        // {
+        //     const centreRnd = centreRel * dims.wholeTableWidh;
+        //     const leftRnd = (centreRnd > dims.descrBoxWidth / 2 ? centreRnd - dims.descrBoxWidth / 2 : 0)
+        //         - dims.sideTdWidth;
+        //     evtTsxs.push(<Description
+        //         cluster={cluster}
+        //         evt={evt}
+        //         leftRender={leftRnd}
+        //         descrWidthRedner={rowRef.clusterWidthRnd}
+        //         ci={ci} />);
+        // }
+
+        evtTsxs.push(<ClusterAndDescr cluster={cluster} curRef={curRef} />);
     }
 
     const style = {

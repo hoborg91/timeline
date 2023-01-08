@@ -51,7 +51,7 @@
 			"cpt": { "en": "Planetary differentiation and geomagnetic field", "ru": "Гравитационная дифференциация и магнитное поле" },
 			"time": { "fmt": "my", "val": -4500 },
 			"scal": { "fmt": "my", "val": 1000 },
-			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Dynamo_Theory_-_Outer_core_convection_and_magnetic_field_geenration.svg/240px-Dynamo_Theory_-_Outer_core_convection_and_magnetic_field_geenration.svg.png"
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Dynamo_Theory_-_Outer_core_convection_and_magnetic_field_generation.svg/240px-Dynamo_Theory_-_Outer_core_convection_and_magnetic_field_generation.svg.png"
 		},
 		{
 			"cpt": { "en": "Microbial mats", "ru": "Цианобактерии" },

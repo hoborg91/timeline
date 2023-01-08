@@ -15,7 +15,8 @@ export interface IEventCluster<T extends IDateFormat> {
     meanReal: IMoment<T>;
     minReal: IMoment<T>;
     maxReal: IMoment<T>;
-    interval: IUniFmtInterval<IDateFormat>;
+    intervalReal: IUniFmtInterval<IDateFormat>;
+    scopeRender: { min: number, max: number };
 }
 
 export type NumToStr = (n: number) => string;

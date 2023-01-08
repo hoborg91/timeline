@@ -57,7 +57,7 @@ const Caption = ({ cluster, leftRender }: {
 
 const Date = ({ cluster, evt }: {
     cluster: IEventCluster<IDateFormat>,
-    evt: { timeVal: number, img: string | null, timeMoment: IMoment<IDateFormat> },
+    evt: { timeMoment: IMoment<IDateFormat> },
 }) => {
     const ctx = React.useContext(Context);
 
@@ -65,13 +65,13 @@ const Date = ({ cluster, evt }: {
         return <div><small>{ctx.timeFormatter.format(evt.timeMoment)}</small></div>;
     }
 
-    return <div><small>{ctx.timeFormatter.format(cluster.interval)}</small></div>;
+    return <div><small>{ctx.timeFormatter.format(cluster.intervalReal)}</small></div>;
 }
 
 export const Description = ({ci, cluster, evt, leftRender, descrWidthRedner }: {
     ci: number,
     cluster: IEventCluster<IDateFormat>,
-    evt: { timeVal: number, img: string | null, timeMoment: IMoment<IDateFormat> },
+    evt: { timeMoment: IMoment<IDateFormat> },
     leftRender: number,
     descrWidthRedner: number,
 }) => {
@@ -80,7 +80,8 @@ export const Description = ({ci, cluster, evt, leftRender, descrWidthRedner }: {
     const style = {
         maxWidth: descrWidthRedner/*dims.descrBoxWidth*/ + "px",
         left: leftRender + "px",
-        top: "-60px",
+        //top: "-60px",
+        bottom: (dims.mainTdHeight + 10) + "px",
         zIndex: ci,
         position: "absolute" as const,
         backgroundColor: "rgba(255, 255, 255, 0.5)",

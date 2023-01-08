@@ -5,14 +5,14 @@ import { ITimeFormatter, TimeFormatter } from './Services/timeFormatter';
 
 const text = new StringUtils(navigator.languages);
 
-export type IDimensions = {
+export type IDimensions = Readonly<{
     mainTdWidth: number;
     mainTdHeight: number;
     sideTdWidth: number;
     descrBoxWidth: number;
     descrBoxHeight: number;
     wholeTableWidh: number;
-}
+}>
 
 const mainTdWidth = 1000, 
       sideTdWidth = 100;
@@ -21,7 +21,8 @@ export const Context = React.createContext<{
     text: ITextWizard,
     time: ITimeWizard,
     timeFormatter: ITimeFormatter,
-    dimensions: Readonly<IDimensions>,
+    dimensions: IDimensions,
+    devMode: boolean,
 }>({
     text,
     time: new TimeWizard(),
@@ -34,4 +35,5 @@ export const Context = React.createContext<{
         descrBoxHeight: 50,
         wholeTableWidh: mainTdWidth + sideTdWidth * 2,
     },
+    devMode: true,
 });
