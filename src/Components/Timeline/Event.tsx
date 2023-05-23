@@ -1,6 +1,7 @@
 import React, { SyntheticEvent } from "react";
 import { IDateFormat } from "../../contracts/timeline";
 import { IEventCluster } from "../ifaces";
+import { compact } from "./utils";
 
 export const Event = ({ cluster, leftRender, ci }: {
     cluster: IEventCluster<IDateFormat>,
@@ -32,28 +33,22 @@ export const Event = ({ cluster, leftRender, ci }: {
     return <div style={style}>{imgTsxs}</div>;
 };
 
-const compact = (leftRender: number, imgWidthRender: number, scopeRender: { min: number, max: number }) => {
-    let lr = leftRender;// - imgWidthRender / 2;
-    if (lr < scopeRender.min)
-        lr = scopeRender.min;
-    else if (lr + imgWidthRender > scopeRender.max)
-        lr = scopeRender.max - imgWidthRender;
-    return lr;
-}
-
 const singleImageHeightRender = 80;
 
-const EventImageSingle = ({ url, leftRender, cluster }: {
+const EventImageSingle = ({ url, leftRender, cluster, onCenter }: {
     url: string,
     leftRender: number,
     cluster: IEventCluster<IDateFormat>,
+    onCenter: (centerRnd: number) => any,
 }) => {
     const [left, setLeft] = React.useState(leftRender + "px");
     const onLoad = (evt: SyntheticEvent<HTMLImageElement>) => {
         const img = evt.target as HTMLImageElement;
         const scale = img.naturalHeight / singleImageHeightRender;
         const imgWidthRender = img.naturalWidth / scale;
-        setLeft(compact(leftRender, imgWidthRender, cluster.scopeRender) + "px");
+        const newLeft = compact(leftRender, imgWidthRender, cluster.scopeRender);
+        setLeft(newLeft + "px");
+        onCenter(newLeft + imgWidthRender / 2);
     };
     return <img
         src={url}
@@ -69,11 +64,12 @@ const EventImageSingle = ({ url, leftRender, cluster }: {
 
 const doubleImageHeightRender = 50;
 
-const EventImageDouble = ({ urls, leftRender, widthRender, cluster }: {
+const EventImageDouble = ({ urls, leftRender, widthRender, cluster, onCenter }: {
     urls: string[],
     leftRender: number,
     widthRender: number,
     cluster: IEventCluster<IDateFormat>,
+    onCenter: (centerRnd: number) => any,
 }) => {
     if (urls.length !== 2)
         throw new Error();
@@ -91,9 +87,10 @@ const EventImageDouble = ({ urls, leftRender, widthRender, cluster }: {
             const wRender = widthsRender.reduce((acc, add) => acc + add, 0);
             const leftAdjusted = centre - wRender / 2;
             const left = compact(leftAdjusted, wRender, cluster.scopeRender);
+            onCenter(left + wRender / 2);
             return {
                 widthsRender,
-                left: compact(leftAdjusted, wRender, cluster.scopeRender) + "px",
+                left: left + "px",
             };
         });
     };
@@ -111,11 +108,12 @@ const EventImageDouble = ({ urls, leftRender, widthRender, cluster }: {
     </div>;
 }
 
-const EventImageMany = ({ urls, leftRender, widthRender, cluster }: {
+const EventImageMany = ({ urls, leftRender, widthRender, cluster, onCenter }: {
     urls: string[],
     leftRender: number,
     widthRender: number,
     cluster: IEventCluster<IDateFormat>,
+    onCenter: (centerRnd: number) => any,
 }) => {
     if (urls.length <= 2)
         throw new Error();
@@ -135,7 +133,8 @@ const EventImageMany = ({ urls, leftRender, widthRender, cluster }: {
     }
     const maxDim = 80 / rowCount;
     let left = (leftRender + widthRender / 2) - (rowCount * maxDim / 2);
-    left = compact(left, rowCount * maxDim, cluster.scopeRender)
+    left = compact(left, rowCount * maxDim, cluster.scopeRender);
+    onCenter(left + widthRender / 2);
     
     const imgRef = urls.map((url, i) => {
         const [row, col] = div(i, rowCount);
@@ -168,11 +167,12 @@ function div(dividend: number, divisor: number) {
     return [ quotient, remainder ];
 }
 
-export const EventImageMontage = ({ cluster, leftRender, widthRender, ci }: {
+export const EventImageMontage = ({ cluster, leftRender, widthRender, ci, onCenter }: {
     cluster: IEventCluster<IDateFormat>,
     leftRender: number,
     widthRender: number,
     ci: number, // for z-index
+    onCenter: (centerRnd: number) => any,
 }) => {
     let ei = 0, imagesCount = 0;
     const images = cluster.events
@@ -182,10 +182,10 @@ export const EventImageMontage = ({ cluster, leftRender, widthRender, ci }: {
     if (images.length === 0) {
         return <></>;
     } else if (images.length === 1) {
-        return <EventImageSingle url={images[0]} leftRender={leftRender} cluster={cluster} />;
+        return <EventImageSingle url={images[0]} leftRender={leftRender} cluster={cluster} onCenter={onCenter} />;
     } else if (images.length === 2) {
-        return <EventImageDouble urls={images} leftRender={leftRender} widthRender={widthRender} cluster={cluster} />;
+        return <EventImageDouble urls={images} leftRender={leftRender} widthRender={widthRender} cluster={cluster} onCenter={onCenter} />;
     } else {
-        return <EventImageMany urls={images} leftRender={leftRender} widthRender={widthRender} cluster={cluster} />;
+        return <EventImageMany urls={images} leftRender={leftRender} widthRender={widthRender} cluster={cluster} onCenter={onCenter} />;
     }
 };

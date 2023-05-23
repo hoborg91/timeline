@@ -1,9 +1,7 @@
 import React from "react";
 import { IDateFormat, IEvent, ILineSettings, IMoment, Interval, Moment } from "../../contracts/timeline";
 import { Mapping } from "../../Services/time";
-import { Description } from "./Description";
 import { IEventCluster, ILineReference } from "../ifaces";
-import { Event } from "./Event";
 import { Context, IDimensions } from "../../context";
 import { ClusterAndDescr } from "./ClusterAndDescr";
 
@@ -78,7 +76,6 @@ export const MainLine = ({ lineSettings, lsi, curRef }:
     { lineSettings: ILineSettings[], lsi: number, curRef: ILineReference }
 ) => {
     const ctx = React.useContext(Context);
-    const dims = ctx.dimensions;
     const ls = lineSettings[lsi];
     const mapping = new Mapping(ctx.dimensions.mainTdWidth, ls.interval);
     const rowRef = _makeRowRef(curRef, mapping, ctx.dimensions);
@@ -87,39 +84,6 @@ export const MainLine = ({ lineSettings, lsi, curRef }:
     
     for (let ci = 0; ci < rowRef.clusters.length; ci++) {
         const cluster = rowRef.clusters[ci];
-        const evt = {
-            timeVal: cluster.meanReal.val as number,
-            img: cluster.events.length === 1 ? cluster.events[0].img : null,
-            timeMoment: Moment(cluster.intervalReal.fmt, cluster.meanReal.val),
-        };
-        const centreRel = (evt.timeVal - curRef.min) / curRef.len;
-
-        // {
-        //     const centreRnd = centreRel * dims.mainTdWidth;
-        //     const leftRnd = centreRnd > 50 ? centreRnd - 50 : 0;
-        //     //let leftRender = leftRel * (dims.wholeTableWidh - dims.descrBoxWidth) - dims.sideTdWidth;
-        //     // if (leftRender < 0)
-        //     //     leftRender = 0;
-        //     // if (leftRender > ctx.dimensions.mainTdWidth - 50)
-        //     //     leftRender = ctx.dimensions.mainTdWidth - 50;
-            
-        //     evtTsxs.push(<Event
-        //         cluster={cluster}
-        //         leftRender={leftRnd}
-        //         ci={ci} />);
-        // }
-
-        // {
-        //     const centreRnd = centreRel * dims.wholeTableWidh;
-        //     const leftRnd = (centreRnd > dims.descrBoxWidth / 2 ? centreRnd - dims.descrBoxWidth / 2 : 0)
-        //         - dims.sideTdWidth;
-        //     evtTsxs.push(<Description
-        //         cluster={cluster}
-        //         evt={evt}
-        //         leftRender={leftRnd}
-        //         descrWidthRedner={rowRef.clusterWidthRnd}
-        //         ci={ci} />);
-        // }
 
         evtTsxs.push(<ClusterAndDescr cluster={cluster} curRef={curRef} />);
     }

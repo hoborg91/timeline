@@ -3,11 +3,14 @@ import { OverlayTrigger, Popover } from "react-bootstrap";
 import { Context } from "../../context";
 import { IDateFormat, IMoment } from "../../contracts/timeline";
 import { IEventCluster } from "../ifaces";
+import { compact } from "./utils";
 
 const Caption = ({ cluster, leftRender }: {
     cluster: IEventCluster<IDateFormat>,
     leftRender: number,
 }) => {
+    // TODO https://stackoverflow.com/questions/37406353/make-container-shrink-to-fit-child-elements-as-they-wrap
+
     const ctx = React.useContext(Context);
 
     if (cluster.events.length === 1) {
@@ -68,18 +71,21 @@ const Date = ({ cluster, evt }: {
     return <div><small>{ctx.timeFormatter.format(cluster.intervalReal)}</small></div>;
 }
 
-export const Description = ({ci, cluster, evt, leftRender, descrWidthRedner }: {
+export const Description = ({ci, cluster, evt, leftRender, descrWidthRedner, widthRender, eventImageMontageCenter }: {
     ci: number,
     cluster: IEventCluster<IDateFormat>,
     evt: { timeMoment: IMoment<IDateFormat> },
     leftRender: number,
     descrWidthRedner: number,
+    widthRender: number,
+    eventImageMontageCenter: number,
 }) => {
     const dims = React.useContext(Context).dimensions;
-    console.log({ leftRender, descrWidthRedner });
+    const compacted = compact(eventImageMontageCenter - descrWidthRedner / 2, descrWidthRedner, cluster.scopeRender);
+    //console.log({ leftRender, descrWidthRedner });
     const style = {
         maxWidth: descrWidthRedner/*dims.descrBoxWidth*/ + "px",
-        left: leftRender + "px",
+        left: compacted + "px",
         //top: "-60px",
         bottom: (dims.mainTdHeight + 10) + "px",
         zIndex: ci,
@@ -88,7 +94,44 @@ export const Description = ({ci, cluster, evt, leftRender, descrWidthRedner }: {
         wordWrap: "break-word" as const,
     };
 
-    return <div style={style}>
+    // const debug1 = cluster.events.filter(e => e.img.indexOf('panoramio') >= 0).length > 0;
+    // if (debug1) {
+    //     console.log(`leftRender=${leftRender}`);
+    //     console.log(`descrWidthRedner=${descrWidthRedner}`);
+    //     console.log(`widthRender=${widthRender}`);
+    //     console.log(`cluster.scopeRender.min=${cluster.scopeRender.min}`);
+    //     console.log(`cluster.scopeRender.max=${cluster.scopeRender.max}`);
+    //     console.log(`compacted=${compacted}`);
+
+    //     console.log(`eventImageMontageCenter=${eventImageMontageCenter}`);
+    // }
+
+    const myRef = React.createRef<HTMLDivElement>();
+    window.requestAnimationFrame(() => {
+        //const debug = cluster.events.filter(e => e.img.indexOf('panoramio') >= 0).length > 0;
+        if (myRef.current) {
+            const cmp = compact(
+                eventImageMontageCenter - myRef.current.offsetWidth / 2,// leftRender,// + widthRender / 2,
+                myRef.current.offsetWidth,
+                cluster.scopeRender
+            ) + "px";
+
+            // console.log('in requestAnimationFrame');
+            // console.log(`leftRender=${leftRender}`);
+            // console.log(`descrWidthRedner=${descrWidthRedner}`);
+            // console.log(`widthRender=${widthRender}`);
+            // console.log(`myRef.current.offsetWidth=${myRef.current.offsetWidth}`);
+            // console.log(`cluster.scopeRender.min=${cluster.scopeRender.min}`);
+            // console.log(`cluster.scopeRender.max=${cluster.scopeRender.max}`);
+            // console.log(`cmp=${cmp}`);
+
+            myRef.current.style.left = cmp;
+            //myRef.current.style.border = '1px solid green';
+
+            //console.log(myRef.current);
+        }
+    });
+    return <div style={style} ref={myRef}>
         <Caption cluster={cluster} leftRender={leftRender} />
         {/* <Date cluster={cluster} evt={evt} /> */}
     </div>;

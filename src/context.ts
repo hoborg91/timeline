@@ -35,5 +35,5 @@ export const Context = React.createContext<{
         descrBoxHeight: 50,
         wholeTableWidh: mainTdWidth + sideTdWidth * 2,
     },
-    devMode: true,
+    devMode: false,
 });
