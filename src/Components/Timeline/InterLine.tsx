@@ -24,7 +24,7 @@ export const InterLine = ({ lineSettings, lsi, refe }: {
     );
 
     if (intersection === "No intersection") {
-        return <tr><td></td><td style={{ height: "100px" }}></td><td></td></tr>;
+        return <tr className="InterLine"><td></td><td style={{ height: "100px" }}></td><td></td></tr>;
     }
 
     const
@@ -53,5 +53,5 @@ export const InterLine = ({ lineSettings, lsi, refe }: {
         backgroundImage: smth,
     };
 
-    return <tr><td></td><td style={style}></td><td></td></tr>;
+    return <tr className="InterLine"><td></td><td style={style}></td><td></td></tr>;
 }

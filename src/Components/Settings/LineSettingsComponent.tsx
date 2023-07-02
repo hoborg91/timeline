@@ -1,6 +1,6 @@
 import React from "react";
-import { Button, Form, InputGroup, Modal } from "react-bootstrap";
-import { BsChevronBarDown, BsChevronBarUp, BsTrash, BsXCircle } from "react-icons/bs";
+import { Button, Form, InputGroup } from "react-bootstrap";
+import { BsChevronBarDown, BsChevronBarUp, BsTrash } from "react-icons/bs";
 import { Context } from "../../context";
 import { IDateFormat, IUniFmtInterval } from "../../contracts/timeline";
 

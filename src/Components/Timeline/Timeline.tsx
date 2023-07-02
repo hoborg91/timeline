@@ -51,44 +51,6 @@ function _makeRef(
     return refe;
 }
 
-// const _thousand = 1000;
-// const _million = 1000 * 1000;
-
-
-
-// const _dateFormatters = (text: ITextWizard) => {
-//     const myFormatter: NumToStr = (time: number) => {
-//         if (time >= 0) {
-//             return time >= _thousand
-//                 ? text.locResource("_by", Math.round((time / _thousand) * 10) / 10)
-//                 : text.locResource("_my", time);
-//         } else {
-//             return time <= -_thousand
-//                 ? text.locResource("_bybce", -Math.round((time / _thousand) * 10) / 10)
-//                 : text.locResource("_mybce", -time);
-//         }
-//     };
-    
-//     const yFormmater: NumToStr = (time: number) => {
-//         if (time >= 0) {
-//             return time >= _million
-//                 ? text.locResource("_my", Math.round((time / _million) * 10) / 10)
-//                 : text.locResource("_y", time);
-//         } else {
-//             return time <= -_million
-//                 ? text.locResource("_mybce", -Math.round((time / _million) * 10) / 10)
-//                 : text.locResource("_ybce", -time);
-//         }
-//     };
-
-//     return {
-//         my: myFormatter,
-//         y: yFormmater,
-//     } as {
-//         [K in IDateFormat]: NumToStr;
-//     };
-// };
-
 export const TimeLine = ({ lineSettings, allEvents }: {
     lineSettings: ILineSettings[],
     allEvents: IEvent<IDateFormat>[]
@@ -106,9 +68,5 @@ export const TimeLine = ({ lineSettings, allEvents }: {
 
     const tableWidth = ctx.dimensions.mainTdWidth + ctx.dimensions.sideTdWidth * 2;
 
-    return <table style={{ width: tableWidth + "px" }}>{trTsxs}</table>;
+    return <table style={{ width: tableWidth + "px" }} className="TimeLine">{trTsxs}</table>;
 }
-
-
-
-

@@ -1,5 +1,5 @@
 import React from "react";
-import { IDateFormat, IEvent, ILineSettings, IMoment, Interval, Moment } from "../../contracts/timeline";
+import { IDateFormat, IEvent, ILineSettings, Interval, Moment } from "../../contracts/timeline";
 import { Mapping } from "../../Services/time";
 import { IEventCluster, ILineReference } from "../ifaces";
 import { Context, IDimensions } from "../../context";
@@ -21,7 +21,6 @@ function _makeRowRef(
     clusters: IEventCluster<IDateFormat>[],
     clusterWidthRnd: number,
 } {
-    // TODO 1. Refactor this (clustersCount may not be an appropriate way to determine clusters).
     const { clustersCount, clusterWidthRnd } = _clusterSettings(dims);
     const tuneRnd = 0;
 
@@ -95,7 +94,7 @@ export const MainLine = ({ lineSettings, lsi, curRef }:
         position: "relative" as const,
     };
     
-    return <tr>
+    return <tr className="MainLine">
         <td style={{ textAlign: "right", width: ctx.dimensions.sideTdWidth + "px" }}>
             {ctx.timeFormatter.format(curRef.minMoment)}
         </td>

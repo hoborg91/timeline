@@ -17,12 +17,10 @@ export const Event = ({ cluster, leftRender, ci }: {
         if (images > 3)
             break;
 
-        // TODO Images would collapse in a column when placed closed to end of line. Looks ugly.
         imgTsxs.push(<img style={{ height: "50px" }} src={e.img} />);
         ei++;
     }
 
-    // TODO Adjust z-indices. Place events above all lines and place descriptions above all other objects.
     const style = {
         left: leftRender + "px",
         top: "20px",
@@ -30,7 +28,7 @@ export const Event = ({ cluster, leftRender, ci }: {
         position: "absolute" as const,
     };
 
-    return <div style={style}>{imgTsxs}</div>;
+    return <div style={style} className="Event">{imgTsxs}</div>;
 };
 
 const singleImageHeightRender = 80;
@@ -58,8 +56,8 @@ const EventImageSingle = ({ url, leftRender, cluster, onCenter }: {
             position: "absolute" as const,
             left,
             top: "0px",
-            //clipPath: "circle(40px)",// "polygon(50% 0%, 0% 100%, 100% 100%)",
-        }} />;
+        }}
+        className="EventImageSingle" />;
 }
 
 const doubleImageHeightRender = 50;
@@ -73,20 +71,45 @@ const EventImageDouble = ({ urls, leftRender, widthRender, cluster, onCenter }: 
 }) => {
     if (urls.length !== 2)
         throw new Error();
+    
     const centre = leftRender + widthRender / 2;
     const [geom, setGeom] = React.useState({
-        widthsRender: [] as number[],
+        widthsRender: [doubleImageHeightRender, doubleImageHeightRender],
         left: leftRender + "px",
     });
-    const onLoad = (evt: SyntheticEvent<HTMLImageElement>) => {
+
+    const onLoad0 = (evt: SyntheticEvent<HTMLImageElement>) => {
         const img = evt.target as HTMLImageElement;
         const scale = img.naturalHeight / doubleImageHeightRender;
+
         setGeom(curGeom => {
             const natWidhtScaled = img.naturalWidth / scale;
-            const widthsRender = [...curGeom.widthsRender, Math.min(natWidhtScaled, doubleImageHeightRender * 1.1)];
+            const tw = Math.min(natWidhtScaled, doubleImageHeightRender * 1.1);
+            const widthsRender = [tw, curGeom.widthsRender[1]];
             const wRender = widthsRender.reduce((acc, add) => acc + add, 0);
             const leftAdjusted = centre - wRender / 2;
             const left = compact(leftAdjusted, wRender, cluster.scopeRender);
+
+            onCenter(left + wRender / 2);
+            return {
+                widthsRender,
+                left: left + "px",
+            };
+        });
+    }
+
+    const onLoad1 = (evt: SyntheticEvent<HTMLImageElement>) => {
+        const img = evt.target as HTMLImageElement;
+        const scale = img.naturalHeight / doubleImageHeightRender;
+
+        setGeom(curGeom => {
+            const natWidhtScaled = img.naturalWidth / scale;
+            const tw = Math.min(natWidhtScaled, doubleImageHeightRender * 1.1);
+            const widthsRender = [curGeom.widthsRender[0], tw];
+            const wRender = widthsRender.reduce((acc, add) => acc + add, 0);
+            const leftAdjusted = centre - wRender / 2;
+            const left = compact(leftAdjusted, wRender, cluster.scopeRender);
+
             onCenter(left + wRender / 2);
             return {
                 widthsRender,
@@ -94,18 +117,21 @@ const EventImageDouble = ({ urls, leftRender, widthRender, cluster, onCenter }: 
             };
         });
     };
-    return <div style={{ position: "absolute" as const, left: geom.left, top: "0px" }}>
-        <img src={urls[0]} onLoad={onLoad} style={{
-            height: doubleImageHeightRender + "px",
-            maxWidth: (doubleImageHeightRender * 1.1) + "px",
-            objectFit: "cover",
-        }} />
-        <img src={urls[1]} onLoad={onLoad} style={{
-            height: doubleImageHeightRender + "px",
-            maxWidth: (doubleImageHeightRender * 1.1) + "px",
-            objectFit: "cover",
-        }} />
-    </div>;
+    return <div
+        style={{ position: "absolute" as const, left: geom.left, top: "0px" }}
+        className="EventImageDouble"
+        >
+            <img src={urls[0]} onLoad={onLoad0} style={{
+                height: doubleImageHeightRender + "px",
+                maxWidth: (doubleImageHeightRender * 1.1) + "px",
+                objectFit: "cover",
+            }} />
+            <img src={urls[1]} onLoad={onLoad1} style={{
+                height: doubleImageHeightRender + "px",
+                maxWidth: (doubleImageHeightRender * 1.1) + "px",
+                objectFit: "cover",
+            }} />
+        </div>;
 }
 
 const EventImageMany = ({ urls, leftRender, widthRender, cluster, onCenter }: {
@@ -117,7 +143,6 @@ const EventImageMany = ({ urls, leftRender, widthRender, cluster, onCenter }: {
 }) => {
     if (urls.length <= 2)
         throw new Error();
-    const debug = urls.filter(u => u.indexOf("Stellar_Fireworks_Finale.jpg") >= 0).length > 0;
     
     const maxRowCount = 5, maxCount = maxRowCount * maxRowCount;
     if (urls.length > maxCount) {
@@ -153,12 +178,15 @@ const EventImageMany = ({ urls, leftRender, widthRender, cluster, onCenter }: {
         maxHeight: maxDim + "px",
         position: "absolute" as const,
     };
-    return <div style={{ position: "absolute" as const, left: left + "px", top: "0px" }}>
-        {imgRef.map(ir => <img
-            src={ir.url}
-            style={{ ...imgStyle, left: (maxDim * ir.col) + "px", top: (maxDim * ir.row) + "px" }}
-            id={ir.url} />)}
-    </div>;
+    return <div
+        style={{ position: "absolute" as const, left: left + "px", top: "0px" }}
+        className="EventImageMany"
+        >
+            {imgRef.map(ir => <img
+                src={ir.url}
+                style={{ ...imgStyle, left: (maxDim * ir.col) + "px", top: (maxDim * ir.row) + "px" }}
+                id={ir.url} />)}
+        </div>;
 }
 
 function div(dividend: number, divisor: number) {
@@ -174,7 +202,6 @@ export const EventImageMontage = ({ cluster, leftRender, widthRender, ci, onCent
     ci: number, // for z-index
     onCenter: (centerRnd: number) => any,
 }) => {
-    let ei = 0, imagesCount = 0;
     const images = cluster.events
         .map(e => e.img)
         .filter(i => i !== undefined && i !== null);

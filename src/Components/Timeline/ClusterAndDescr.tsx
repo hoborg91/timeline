@@ -49,27 +49,12 @@ export const ClusterAndDescr = ({ cluster, curRef }: {
 
     const descrWidthRender = cluster.scopeRender.max - cluster.scopeRender.min - descrWidthRed * 2;
     const l1 = compact(
-        (leftRnd + descrWidthRender / 2), //(cluster.scopeRender.min + descrWidthRed) //leftRnd
+        (leftRnd + descrWidthRender / 2),
         descrWidthRender,
         cluster.scopeRender
     );
-    //offsetWidth
-
-    // if (cluster.events.filter(e => e.img.indexOf('Chartres') >= 0).length > 0) {
-    //     console.log('DEBUG');        
-    //     console.log(`cluster.minReal.val=${cluster.minReal.val}`);
-    //     console.log(`cluster.maxReal.val=${cluster.maxReal.val}`);
-    //     console.log(`curRef.min=${curRef.min}`);
-    //     console.log(`leftRnd=${leftRnd}`);
-    //     console.log(`widthRnd=${widthRnd}`);
-    //     console.log(`descrWidthRender=${descrWidthRender}`);
-    //     console.log(`cluster.scopeRender.min=${cluster.scopeRender.min}`);
-    //     console.log(`cluster.scopeRender.max=${cluster.scopeRender.max}`);
-    //     console.log(`l1=${l1}`);
-    // }
 
     const onCenter = (centerRnd: number) => {
-        //console.log(`onCenter(${centerRnd})`);
         setEventImageMontageCenterRnd(centerRnd);
     };
 

@@ -82,11 +82,10 @@ export const Description = ({ci, cluster, evt, leftRender, descrWidthRedner, wid
 }) => {
     const dims = React.useContext(Context).dimensions;
     const compacted = compact(eventImageMontageCenter - descrWidthRedner / 2, descrWidthRedner, cluster.scopeRender);
-    //console.log({ leftRender, descrWidthRedner });
+    
     const style = {
-        maxWidth: descrWidthRedner/*dims.descrBoxWidth*/ + "px",
+        maxWidth: descrWidthRedner + "px",
         left: compacted + "px",
-        //top: "-60px",
         bottom: (dims.mainTdHeight + 10) + "px",
         zIndex: ci,
         position: "absolute" as const,
@@ -94,44 +93,19 @@ export const Description = ({ci, cluster, evt, leftRender, descrWidthRedner, wid
         wordWrap: "break-word" as const,
     };
 
-    // const debug1 = cluster.events.filter(e => e.img.indexOf('panoramio') >= 0).length > 0;
-    // if (debug1) {
-    //     console.log(`leftRender=${leftRender}`);
-    //     console.log(`descrWidthRedner=${descrWidthRedner}`);
-    //     console.log(`widthRender=${widthRender}`);
-    //     console.log(`cluster.scopeRender.min=${cluster.scopeRender.min}`);
-    //     console.log(`cluster.scopeRender.max=${cluster.scopeRender.max}`);
-    //     console.log(`compacted=${compacted}`);
-
-    //     console.log(`eventImageMontageCenter=${eventImageMontageCenter}`);
-    // }
-
     const myRef = React.createRef<HTMLDivElement>();
     window.requestAnimationFrame(() => {
-        //const debug = cluster.events.filter(e => e.img.indexOf('panoramio') >= 0).length > 0;
         if (myRef.current) {
             const cmp = compact(
-                eventImageMontageCenter - myRef.current.offsetWidth / 2,// leftRender,// + widthRender / 2,
+                eventImageMontageCenter - myRef.current.offsetWidth / 2,
                 myRef.current.offsetWidth,
                 cluster.scopeRender
             ) + "px";
 
-            // console.log('in requestAnimationFrame');
-            // console.log(`leftRender=${leftRender}`);
-            // console.log(`descrWidthRedner=${descrWidthRedner}`);
-            // console.log(`widthRender=${widthRender}`);
-            // console.log(`myRef.current.offsetWidth=${myRef.current.offsetWidth}`);
-            // console.log(`cluster.scopeRender.min=${cluster.scopeRender.min}`);
-            // console.log(`cluster.scopeRender.max=${cluster.scopeRender.max}`);
-            // console.log(`cmp=${cmp}`);
-
             myRef.current.style.left = cmp;
-            //myRef.current.style.border = '1px solid green';
-
-            //console.log(myRef.current);
         }
     });
-    return <div style={style} ref={myRef}>
+    return <div style={style} ref={myRef} className="Description">
         <Caption cluster={cluster} leftRender={leftRender} />
         {/* <Date cluster={cluster} evt={evt} /> */}
     </div>;
