@@ -78,6 +78,18 @@
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Top_of_Atmosphere.jpg/320px-Top_of_Atmosphere.jpg"
 		},
 		{
+			"cpt": { "en": "Red algae", "ru": "Красные водоросли" },
+			"time": { "fmt": "my", "val": -1600 },
+			"scal": { "fmt": "my", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Botryocladia_occidentalis.jpg/226px-Botryocladia_occidentalis.jpg"
+		},
+		{
+			"cpt": { "en": "Ediacaran biota", "ru": "Эдиакарская биота" },
+			"time": { "fmt": "my", "val": -600 },
+			"scal": { "fmt": "my", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Life_in_the_Ediacaran_sea.jpg/320px-Life_in_the_Ediacaran_sea.jpg"
+		},
+		{
 			"cpt": { "en": "Trilobites", "ru": "Трилобиты" },
 			"time": { "fmt": "my", "val": -521 },
 			"scal": { "fmt": "my", "val": 10 },
@@ -162,16 +174,46 @@
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Chicxulub_impact_-_artist_impression.jpg/300px-Chicxulub_impact_-_artist_impression.jpg"
 		},
 		{
-			"cpt": { "en": "Darwinius", "ru": "Darwinius masillae" },
+			"cpt": { "en": "Darwinius", "ru": "Darwinius" },
 			"time": { "fmt": "my", "val": -47 },
 			"scal": { "fmt": "my", "val": 10 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Darwiniusfig-s62cropped.jpg/170px-Darwiniusfig-s62cropped.jpg"
+		},
+		{
+			"cpt": { "en": "Proconsul", "ru": "Проконсул" },
+			"time": { "fmt": "my", "val": -21 },
+			"scal": { "fmt": "y", "val": 100000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/8/84/Proconsul_NT.jpg"
+		},
+		{
+			"cpt": { "en": "Ouranopithecus", "ru": "Уранопитек" },
+			"time": { "fmt": "y", "val": -9600000 },
+			"scal": { "fmt": "y", "val": 100000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Ouranopithecus_macedoniensis.jpg/634px-Ouranopithecus_macedoniensis.jpg"
+		},
+		{
+			"cpt": { "en": "Australopithecus", "ru": "Австралопитек" },
+			"time": { "fmt": "y", "val": -4200000 },
+			"scal": { "fmt": "y", "val": 100000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Australopithecus_sediba_%28Fundort_Malapa%29.jpg/320px-Australopithecus_sediba_%28Fundort_Malapa%29.jpg"
+		},
+		{
+			"cpt": { "en": "Chopper", "ru": "Чоппер" },
+			"time": { "fmt": "y", "val": -2600000 },
+			"scal": { "fmt": "y", "val": 10000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Chopper%2C_Nationalmuseet.jpg/320px-Chopper%2C_Nationalmuseet.jpg"
 		},
 		{
 			"cpt": { "en": "Homo habilis", "ru": "Человек умелый" },
 			"time": { "fmt": "y", "val": -2000000 },
 			"scal": { "fmt": "y", "val": 10000 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Homo_habilis_in_Kulturama.jpg/196px-Homo_habilis_in_Kulturama.jpg"
+		},
+		{
+			"cpt": { "en": "Hand axe", "ru": "Рубило" },
+			"time": { "fmt": "y", "val": -1600000 },
+			"scal": { "fmt": "y", "val": 10000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Flint_hand_axe.JPG/410px-Flint_hand_axe.JPG"
 		},
 		{
 			"cpt": { "en": "Fire", "ru": "Огонь" },
@@ -184,6 +226,12 @@
 			"time": { "fmt": "y", "val": -200000 },
 			"scal": { "fmt": "y", "val": 10000 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Human.svg/193px-Human.svg.png"
+		},
+		{
+			"cpt": { "en": "Arrowhead", "ru": "Наконечник стрелы" },
+			"time": { "fmt": "y", "val": -64000 },
+			"scal": { "fmt": "y", "val": 1000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Fleche_Font_Robert_231.4_(4).jpg/319px-Fleche_Font_Robert_231.4_(4).jpg"
 		},
 		{
 			"cpt": { "en": "Neolithic Revolution", "ru": "Неолитическая революция" },
@@ -210,6 +258,12 @@
 			"img": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Tableta_con_trillo.png"
 		},
 		{
+			"cpt": { "en": "Late Bronze Age collapse", "ru": "Катастрофа бронзового века" },
+			"time": { "fmt": "y", "val": -1200 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/J_G_Trautmann_Das_brennende_Troja.jpg/304px-J_G_Trautmann_Das_brennende_Troja.jpg"
+		},
+		{
 			"cpt": { "en": "Buddhism", "ru": "Буддизм" },
 			"time": { "fmt": "y", "val": -500 },
 			"scal": { "fmt": "y", "val": 100 },
@@ -228,7 +282,7 @@
 			"img": "https://upload.wikimedia.org/wikipedia/commons/6/68/Young_Folks%27_History_of_Rome_illus420.png"
 		},
 		{
-			"cpt": { "en": "Writing", "ru": "Ислам" },
+			"cpt": { "en": "Islam", "ru": "Ислам" },
 			"time": { "fmt": "y", "val": 610 },
 			"scal": { "fmt": "y", "val": 100 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/The_Ka%27ba%2C_Great_Mosque_of_Mecca%2C_Saudi_Arabia_%284%29.jpg/320px-The_Ka%27ba%2C_Great_Mosque_of_Mecca%2C_Saudi_Arabia_%284%29.jpg"
