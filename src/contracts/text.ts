@@ -5,5 +5,7 @@ export interface IPlurString {
 }
 
 export type IMultiLangString = {
-    [key: string]: string | IPlurString;
+    [key: LangMonkier]: string | IPlurString;
 }
+
+export type LangMonkier = string & { readonly '': unique symbol };

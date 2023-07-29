@@ -91,7 +91,7 @@ export const Settings = ({ currentSettings, apply }: {
         setSettings(n);
     };
 
-    return <div>
+    return <div style={{ display: "inline-block" }}>
         <Button size="sm" variant="primary" onClick={handleShow}>
             {ctx.text.locResource("settings")}
         </Button>

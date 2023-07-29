@@ -11,7 +11,7 @@ export function Moment<T extends IDateFormat>(fmt: T, val: any): IMoment<T> {
     return { fmt, val };
 }
 
-export interface IUniFmtInterval<T extends IDateFormat> { // TODO It seems that type arguments is redundant. Refactor?
+export interface IUniFmtInterval<T extends IDateFormat> {
     fromVal: any;
     tillVal: any;
     fmt: T;

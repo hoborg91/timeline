@@ -1,4 +1,4 @@
-import { IMultiLangString, IPlurString } from "../contracts/text";
+import { IMultiLangString, IPlurString, LangMonkier } from "../contracts/text";
 import allResources from "../../data/resources.json";
 
 export interface ITextWizard {
@@ -7,26 +7,13 @@ export interface ITextWizard {
 }
 
 export class StringUtils implements ITextWizard {
-    private _langs: string[];
+    private _getLanguages: () => readonly LangMonkier[];
     private _allTexts: { key: string, loc: IMultiLangString }[];
-    private _checkLocRegex = new RegExp("\\{\\d+\\}", "gi");
+    private _checkLocReg = new RegExp("\\{\\d+\\}", "gi");
     private _paramRegs = Array(5).fill(1).map((_, i) => new RegExp(`\\{${i}\\}`, "gi"));
     
-    constructor(preferredLanguages: readonly string[]) {
-        this._langs = [];
-        let enAdded = false, enUsAdded = false;
-        for (let loc of preferredLanguages) {
-            this._langs.push(loc);
-            if (loc === "en")
-                enAdded = true;
-            else if (loc === "en-US")
-                enUsAdded = true;
-        }
-        if (!enAdded)
-            this._langs.push("en");
-        if (!enUsAdded)
-            this._langs.push("en-US");
-            
+    constructor(getLanguages: () => readonly LangMonkier[]) {
+        this._getLanguages = getLanguages;
         this._allTexts = allResources.texts;
     }
 
@@ -52,7 +39,7 @@ export class StringUtils implements ITextWizard {
             const paramStr = this.locValue(params[pi]);
             result = result.replace(reg, paramStr);
         }
-        if (this._checkLocRegex.test(result))
+        if (this._checkLocReg.test(result))
             throw new Error(`No enough parameter values for text "${strNoParams}".`);
         return result;
     }
@@ -62,12 +49,12 @@ export class StringUtils implements ITextWizard {
             return this._paramRegs[i];
         }
 
-        return new RegExp("\\{" + i + "\\}", "gi");
+        return new RegExp(`\\{${i}\\}`, "gi");
     }
 
     private locValue(val: any) {
         const tryToLocaleString = (typeof val.toLocaleString === "function");
-        for (const lng of this._langs) {
+        for (const lng of this._getLanguages()) {
             try {
                 if (tryToLocaleString)
                     return val.toLocaleString(lng);
@@ -92,14 +79,14 @@ export class StringUtils implements ITextWizard {
         if (typeof str === "string")
             return str;
 
-        for (let loc of this._langs) {
+        for (let loc of this._getLanguages()) {
             const s = str[loc];
             if (s !== undefined && s !== null)
                 return s;
         }
 
         for (const k in str) {
-            return str[k];
+            return str[k as LangMonkier];
         }
 
         throw new Error("The given text provides no suitable localizations.");
