@@ -3,7 +3,7 @@ import { Throw } from "../utils";
 import { ITextWizard } from "./text";
 
 export interface ITimeFormatter {
-    format(what: IMoment<IDateFormat> | IUniFmtInterval<IDateFormat>): string;
+    format(what: IMoment | IUniFmtInterval): string;
 } 
 
 export class TimeFormatter implements ITimeFormatter {
@@ -60,15 +60,15 @@ export class TimeFormatter implements ITimeFormatter {
         }
     }
 
-    private _isMoment(what: any): what is IMoment<IDateFormat> {
+    private _isMoment(what: any): what is IMoment {
         return Object.keys(what).filter(k => k === "fmt" || k === "val").length === 2;
     }
     
-    private _isInterval(what: any): what is IUniFmtInterval<IDateFormat> {
+    private _isInterval(what: any): what is IUniFmtInterval {
         return Object.keys(what).filter(k => k === "fmt" || k === "fromVal" || k === "tillVal").length === 3;
     }
 
-    format(what: IMoment<IDateFormat> | IUniFmtInterval<IDateFormat>): string {
+    format(what: IMoment | IUniFmtInterval): string {
         const trashold = what.fmt === "my"
             ? 1000
             : (what.fmt === "y" ? 1000000 : Throw());
@@ -79,7 +79,7 @@ export class TimeFormatter implements ITimeFormatter {
                 bigPositive: what.fmt === "my" ? "_by" : "_my",
                 bigNegative: what.fmt === "my" ? "_bybce" : "_mybce",
             });
-        } else {
+        } else if (this._isInterval(what)) {
             if (what.fromVal * what.tillVal >= 0 && (what.fromVal >= trashold) === (what.tillVal >= trashold)) {
                 return this._fmtSimpleInterval(what.fromVal, what.tillVal, trashold, 10, {
                     commonPositive: what.fmt === "my" ? "__my" : "__y",
@@ -91,6 +91,8 @@ export class TimeFormatter implements ITimeFormatter {
                 const f = Moment(what.fmt, what.fromVal), t = Moment(what.fmt, what.tillVal);
                 return `${this.format(f)} — ${this.format(t)}`;
             }
+        } else {
+            Throw();
         }
     }
 }

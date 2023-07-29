@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Context } from "../../context";
-import { IDateFormat } from "../../contracts/timeline";
 import { IEventCluster, ILineReference } from "../ifaces";
 import { Description } from "./Description";
 import { EventImageMontage } from "./Event";
 import { compact } from "./utils";
 
 export const ClusterAndDescr = ({ cluster, curRef }: {
-    cluster: IEventCluster<IDateFormat>,
+    cluster: IEventCluster,
     curRef: ILineReference,
 }) => {
     const ctx = React.useContext(Context);

@@ -1,19 +1,25 @@
-import { IDateFormat, IUniFmtInterval, Interval, IMoment } from "../contracts/timeline";
+import { IDateFormat, IUniFmtInterval, Interval, IMoment, Moment } from "../contracts/timeline";
 
-function ThrowFmtNotSupported(): never { throw new Error("The given time format is not supported."); }
-
-export interface ITimeWizard {
-    Contains(interval: IUniFmtInterval<IDateFormat>, moment: IMoment<IDateFormat>): boolean;
-
-    GetIntersection<T1 extends IDateFormat, T2 extends IDateFormat>(
-        int1: IUniFmtInterval<T1>,
-        int2: IUniFmtInterval<T2>
-    )
-        : { isc1: IUniFmtInterval<T1>, isc2: IUniFmtInterval<T2> } | "No intersection";
+function ThrowFmtNotSupported(): never {
+    throw new Error("The given time format is not supported.");
 }
 
-export class TimeWizard implements ITimeWizard{
-    private _yFactor(withFmt: IUniFmtInterval<IDateFormat> | IMoment<IDateFormat>): number | never {
+export interface ITimeWizard {
+    Contains(interval: IUniFmtInterval, moment: IMoment): boolean;
+
+    GetIntersection(
+        int1: IUniFmtInterval,
+        int2: IUniFmtInterval
+    )
+        : { isc1: IUniFmtInterval, isc2: IUniFmtInterval } | "No intersection";
+
+    ConvertTo(moment: IMoment, targetFormat: IDateFormat): IMoment;
+    
+    ConvertTo(value: number, sourceFormat: IDateFormat, targetFormat: IDateFormat): number;
+}
+
+export class TimeWizard implements ITimeWizard {
+    private _yFactor(withFmt: IUniFmtInterval | IMoment): number | never {
         if (withFmt.fmt == "y")
             return 1;
         if (withFmt.fmt == "my")
@@ -21,11 +27,8 @@ export class TimeWizard implements ITimeWizard{
         ThrowFmtNotSupported();
     }
 
-    public Contains(interval: IUniFmtInterval<IDateFormat>, moment: IMoment<IDateFormat>): boolean {
-        if ([interval.fmt, moment.fmt]
-            .filter(fmt => fmt !== "y" && fmt !== "my")
-            .length > 0)
-            ThrowFmtNotSupported();
+    public Contains(interval: IUniFmtInterval, moment: IMoment): boolean {
+        this.ThrowIfFmtNotSupported(interval.fmt, moment.fmt);
 
         const
             from = (interval.fromVal as number) * this._yFactor(interval),
@@ -35,16 +38,13 @@ export class TimeWizard implements ITimeWizard{
         return from <= mmnt && mmnt <= till;
     }
     
-    public GetIntersection<T1 extends IDateFormat, T2 extends IDateFormat>(
-        int1: IUniFmtInterval<T1>,
-        int2: IUniFmtInterval<T2>
+    public GetIntersection(
+        int1: IUniFmtInterval,
+        int2: IUniFmtInterval
     )
-        : { isc1: IUniFmtInterval<T1>, isc2: IUniFmtInterval<T2> } | "No intersection"
+        : { isc1: IUniFmtInterval, isc2: IUniFmtInterval } | "No intersection"
     {
-        if ([int1.fmt, int2.fmt]
-            .filter(fmt => fmt !== "y" && fmt !== "my")
-            .length > 0)
-            ThrowFmtNotSupported();
+        this.ThrowIfFmtNotSupported(int1.fmt, int2.fmt);
 
         const
             int1from = (int1.fromVal as number) * this._yFactor(int1),
@@ -52,10 +52,7 @@ export class TimeWizard implements ITimeWizard{
             int2from = (int2.fromVal as number) * this._yFactor(int2),
             int2till = (int2.tillVal as number) * this._yFactor(int2);
 
-        //console.log(`GetIntersection(${int1from}, ${int1till}, ${int2from}, ${int2till})...`);
-
         if (int1from > int2till || int1till < int2from) {
-            //console.log("No intersection");
             return "No intersection";
         }
 
@@ -76,15 +73,62 @@ export class TimeWizard implements ITimeWizard{
                 return isc(int1from, int2till);
         }
     }
+
+    public ConvertTo(moment: IMoment, targetFormat: IDateFormat): IMoment;
+    public ConvertTo(value: number, sourceFormat: IDateFormat, targetFormat: IDateFormat): number;
+    public ConvertTo(a1: IMoment | number, a2: IDateFormat, a3?: IDateFormat) : IMoment | number {
+        if (typeof a1 === "number") {
+            const value = a1;
+            const sourceFormat = a2;
+            const targetFormat = a3 as IDateFormat;
+
+            this.ThrowIfFmtNotSupported(sourceFormat, targetFormat);
+
+            if (sourceFormat === targetFormat)
+                return value;
+            
+            if (sourceFormat === "my" && targetFormat === "y")
+                return value * 1000 * 1000;
+            
+            if (sourceFormat === "y" && targetFormat === "my")
+                return value / (1000 * 1000);
+            
+            ThrowFmtNotSupported();
+        } else {
+            const moment = a1;
+            const targetFormat = a2;
+
+            this.ThrowIfFmtNotSupported(moment.fmt, targetFormat);
+
+            if (moment.fmt === targetFormat)
+                return moment;
+            
+            if (moment.fmt === "my" && targetFormat === "y")
+                return Moment(targetFormat, moment.val * 1000 * 1000);
+            
+            if (moment.fmt === "y" && targetFormat === "my")
+                return Moment(targetFormat, moment.val / (1000 * 1000));
+            
+            ThrowFmtNotSupported();
+        }
+    }
+
+    private ThrowIfFmtNotSupported(...fmts: IDateFormat[]) {
+        if (fmts
+            .filter(fmt => fmt !== "y" && fmt !== "my")
+            .length > 0)
+            ThrowFmtNotSupported();
+    }
 }
 
-export class Mapping<T extends IDateFormat> {
+export class Mapping {
     private _widthRnd: number;
     private _widthReal: number;
     private _scale: number;
-    private _real: IUniFmtInterval<T>;
+    private _real: IUniFmtInterval;
+    private _time: ITimeWizard;
 
-    constructor (widthRnd: number, real: IUniFmtInterval<T>) {
+    constructor (widthRnd: number, real: IUniFmtInterval, time: ITimeWizard) {
         if (real.fmt !== "my" && real.fmt != "y")
             ThrowFmtNotSupported();
         if (widthRnd <= 0)
@@ -94,13 +138,15 @@ export class Mapping<T extends IDateFormat> {
         this._widthReal = real.tillVal - real.fromVal;
         this._scale = this._widthReal / this._widthRnd;
         this._real = real;
+        this._time = time;
     }
 
-    public FromRealToRender(moment: IMoment<T>): number {
-        if (moment.fmt !== this._real.fmt)
-            throw new Error("Different date formats are not supported.");
+    public FromRealToRender(moment: IMoment): number {
+        // if (moment.fmt !== this._real.fmt)
+        //     throw new Error("Different date formats are not supported.");
+        const convMoment = this._time.ConvertTo(moment, this._real.fmt);
         
-        const difReal = moment.val - this._real.fromVal;
+        const difReal = convMoment.val - this._real.fromVal;
         const result = difReal / this._scale;
         return result;
     }

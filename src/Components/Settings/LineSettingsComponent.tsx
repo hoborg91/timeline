@@ -2,20 +2,20 @@ import React from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import { BsChevronBarDown, BsChevronBarUp, BsTrash } from "react-icons/bs";
 import { Context } from "../../context";
-import { IDateFormat, IUniFmtInterval } from "../../contracts/timeline";
+import { IUniFmtInterval } from "../../contracts/timeline";
 
 export const LineSettingsComponent = ({ interval, color, remove, edit, moveUp, moveDown }: {
-    interval: IUniFmtInterval<IDateFormat>,
+    interval: IUniFmtInterval,
     color: string,
     remove: () => any,
-    edit: (i: IUniFmtInterval<IDateFormat>) => any,
+    edit: (i: IUniFmtInterval) => any,
     moveUp: (() => any) | null,
     moveDown: (() => any) | null,
 }) => {
     const ctx = React.useContext(Context);
 
     const onChange1 = (e: any) => {
-        const nm = e.target.name as keyof IUniFmtInterval<IDateFormat>;
+        const nm = e.target.name as keyof IUniFmtInterval;
         interval[nm] = e.target.value;
         edit(interval);
     };

@@ -42,7 +42,7 @@ export const Settings = ({ currentSettings, apply }: {
         setSettings(settings.filter(s => s.renderKey !== renderKey));
     };
 
-    const editLine = (renderKey: number, i: IUniFmtInterval<IDateFormat>) => {
+    const editLine = (renderKey: number, i: IUniFmtInterval) => {
         setSettings(settings.map(s => {
             if (s.renderKey === renderKey)
                 s.ls.interval = i;

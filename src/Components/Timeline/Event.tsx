@@ -4,7 +4,7 @@ import { IEventCluster } from "../ifaces";
 import { compact } from "./utils";
 
 export const Event = ({ cluster, leftRender, ci }: {
-    cluster: IEventCluster<IDateFormat>,
+    cluster: IEventCluster,
     leftRender: number,
     ci: number,
 }) => {
@@ -36,7 +36,7 @@ const singleImageHeightRender = 80;
 const EventImageSingle = ({ url, leftRender, cluster, onCenter }: {
     url: string,
     leftRender: number,
-    cluster: IEventCluster<IDateFormat>,
+    cluster: IEventCluster,
     onCenter: (centerRnd: number) => any,
 }) => {
     const [left, setLeft] = React.useState(leftRender + "px");
@@ -66,7 +66,7 @@ const EventImageDouble = ({ urls, leftRender, widthRender, cluster, onCenter }: 
     urls: string[],
     leftRender: number,
     widthRender: number,
-    cluster: IEventCluster<IDateFormat>,
+    cluster: IEventCluster,
     onCenter: (centerRnd: number) => any,
 }) => {
     if (urls.length !== 2)
@@ -138,7 +138,7 @@ const EventImageMany = ({ urls, leftRender, widthRender, cluster, onCenter }: {
     urls: string[],
     leftRender: number,
     widthRender: number,
-    cluster: IEventCluster<IDateFormat>,
+    cluster: IEventCluster,
     onCenter: (centerRnd: number) => any,
 }) => {
     if (urls.length <= 2)
@@ -185,7 +185,8 @@ const EventImageMany = ({ urls, leftRender, widthRender, cluster, onCenter }: {
             {imgRef.map(ir => <img
                 src={ir.url}
                 style={{ ...imgStyle, left: (maxDim * ir.col) + "px", top: (maxDim * ir.row) + "px" }}
-                id={ir.url} />)}
+                id={ir.url}
+                key={ir.url} />)}
         </div>;
 }
 
@@ -196,7 +197,7 @@ function div(dividend: number, divisor: number) {
 }
 
 export const EventImageMontage = ({ cluster, leftRender, widthRender, ci, onCenter }: {
-    cluster: IEventCluster<IDateFormat>,
+    cluster: IEventCluster,
     leftRender: number,
     widthRender: number,
     ci: number, // for z-index

@@ -2,27 +2,27 @@ import { IMultiLangString } from "./text";
 
 export type IDateFormat = "y" | "my";
 
-export interface IMoment<T extends IDateFormat> {
-    fmt: T;
+export interface IMoment {
     val: any;
+    fmt: IDateFormat;
 }
 
-export function Moment<T extends IDateFormat>(fmt: T, val: any): IMoment<T> {
+export function Moment(fmt: IDateFormat, val: any): IMoment {
     return { fmt, val };
 }
 
-export interface IUniFmtInterval<T extends IDateFormat> {
+export interface IUniFmtInterval {
     fromVal: any;
     tillVal: any;
-    fmt: T;
+    fmt: IDateFormat;
 }
 
-export function Interval<T extends IDateFormat>(fmt: T, fromVal: any, tillVal: any): IUniFmtInterval<T> {
+export function Interval(fmt: IDateFormat, fromVal: any, tillVal: any): IUniFmtInterval {
     return { fmt, fromVal, tillVal };
 }
 
 export interface ILineSettings {
-    interval: IUniFmtInterval<IDateFormat>;
+    interval: IUniFmtInterval;
     mainColor: string;
 }
 
@@ -30,9 +30,9 @@ export function LineSettings(mainColor: string, fmt: IDateFormat, fromVal: numbe
     return { interval: Interval(fmt, fromVal, tillVal), mainColor };
 }
 
-export interface IEvent<T extends IDateFormat> {
+export interface IEvent {
     cpt: string | IMultiLangString,
-    time: IMoment<T>,
-    scal: IMoment<T> | null,
+    time: IMoment,
+    scal: IMoment | null,
     img: string,
 }

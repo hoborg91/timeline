@@ -24,14 +24,15 @@ export const App = () => {
     }
     const [lineSettings, setLineSettings] = React.useState([
         LineSettings(color(), "my", -14000, 1),
-        LineSettings(color(), "my", -4000, 1),
-        LineSettings(color(), "my", -600, 1),
+        LineSettings(color(), "my", -2500, 1),
+        LineSettings(color(), "my", -300, 1),
         LineSettings(color(), "y", -2000000, 2000),
+        LineSettings(color(), "y", -10000, 2000),
         LineSettings(color(), "y", -1000, 2000),
         LineSettings(color(), "y", 1400, 2000),
         LineSettings(color(), "y", 1900, 2000),
     ] as ILineSettings[]);
-    const allEvents = all.events as IEvent<IDateFormat>[];
+    const allEvents = all.events as IEvent[];
 
     const changeLang = (lang: LangMonkier) => {
         ctx.setLanguage(lang);

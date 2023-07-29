@@ -1,5 +1,5 @@
 import React from "react";
-import { IDateFormat, IEvent, ILineSettings, Interval, Moment } from "../../contracts/timeline";
+import { IEvent, ILineSettings, Interval, Moment } from "../../contracts/timeline";
 import { Mapping } from "../../Services/time";
 import { IEventCluster, ILineReference } from "../ifaces";
 import { Context, IDimensions } from "../../context";
@@ -15,23 +15,23 @@ function _clusterSettings(dims: IDimensions) {
 
 function _makeRowRef(
     curRef: ILineReference,
-    mapping: Mapping<IDateFormat>,
+    mapping: Mapping,
     dims: IDimensions
 ): { 
-    clusters: IEventCluster<IDateFormat>[],
+    clusters: IEventCluster[],
     clusterWidthRnd: number,
 } {
     const { clustersCount, clusterWidthRnd } = _clusterSettings(dims);
     const tuneRnd = 0;
 
-    const clusters: IEventCluster<IDateFormat>[] = [];
+    const clusters: IEventCluster[] = [];
     const evtToClst = curRef.eventsToRender.map(e => null as ({} | null));
 
     for (let ci = 0; ci < clustersCount; ci++) {
         const
             clLeftRnd = Math.floor(ci * clusterWidthRnd - tuneRnd),
             clRightRnd = Math.ceil((ci + 1) * clusterWidthRnd + tuneRnd);
-        const events: IEvent<IDateFormat>[] = [];
+        const events: IEvent[] = [];
         const eventIndices: number[] = [];
         let min: number | null = null, max: number | null = null, sum = 0;
         for (let ei = 0; ei < curRef.eventsToRender.length; ei++) {
@@ -53,7 +53,7 @@ function _makeRowRef(
             continue;
         events.sort((a, b) => a.time.val - b.time.val);
         const fmt = events[0].time.fmt;
-        const cluster: IEventCluster<IDateFormat> = {
+        const cluster: IEventCluster = {
             events,
             meanReal: Moment(fmt, sum / events.length),
             minReal: Moment(fmt, min),
@@ -76,7 +76,7 @@ export const MainLine = ({ lineSettings, lsi, curRef }:
 ) => {
     const ctx = React.useContext(Context);
     const ls = lineSettings[lsi];
-    const mapping = new Mapping(ctx.dimensions.mainTdWidth, ls.interval);
+    const mapping = new Mapping(ctx.dimensions.mainTdWidth, ls.interval, ctx.time);
     const rowRef = _makeRowRef(curRef, mapping, ctx.dimensions);
 
     const evtTsxs = [];
@@ -84,7 +84,7 @@ export const MainLine = ({ lineSettings, lsi, curRef }:
     for (let ci = 0; ci < rowRef.clusters.length; ci++) {
         const cluster = rowRef.clusters[ci];
 
-        evtTsxs.push(<ClusterAndDescr cluster={cluster} curRef={curRef} />);
+        evtTsxs.push(<ClusterAndDescr cluster={cluster} curRef={curRef} key={ci} />);
     }
 
     const style = {

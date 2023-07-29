@@ -1,12 +1,12 @@
 import React from "react";
 import { OverlayTrigger, Popover } from "react-bootstrap";
 import { Context } from "../../context";
-import { IDateFormat, IMoment } from "../../contracts/timeline";
+import { IMoment } from "../../contracts/timeline";
 import { IEventCluster } from "../ifaces";
 import { compact } from "./utils";
 
 const Caption = ({ cluster, leftRender }: {
-    cluster: IEventCluster<IDateFormat>,
+    cluster: IEventCluster,
     leftRender: number,
 }) => {
     // TODO https://stackoverflow.com/questions/37406353/make-container-shrink-to-fit-child-elements-as-they-wrap
@@ -43,7 +43,7 @@ const Caption = ({ cluster, leftRender }: {
         <Popover>
             <Popover.Body>
                 <ul>
-                    {cluster.events.map(e => <li>{ctx.text.toString(e.cpt) ?? ctx.text.locResource("unkevt")} ({ctx.timeFormatter.format(e.time)})</li>)}
+                    {cluster.events.map((e, ei) => <li key={ei}>{ctx.text.toString(e.cpt) ?? ctx.text.locResource("unkevt")} ({ctx.timeFormatter.format(e.time)})</li>)}
                 </ul>
             </Popover.Body>
         </Popover>
@@ -59,8 +59,8 @@ const Caption = ({ cluster, leftRender }: {
 }
 
 const Date = ({ cluster, evt }: {
-    cluster: IEventCluster<IDateFormat>,
-    evt: { timeMoment: IMoment<IDateFormat> },
+    cluster: IEventCluster,
+    evt: { timeMoment: IMoment },
 }) => {
     const ctx = React.useContext(Context);
 
@@ -73,8 +73,8 @@ const Date = ({ cluster, evt }: {
 
 export const Description = ({ci, cluster, evt, leftRender, descrWidthRedner, widthRender, eventImageMontageCenter }: {
     ci: number,
-    cluster: IEventCluster<IDateFormat>,
-    evt: { timeMoment: IMoment<IDateFormat> },
+    cluster: IEventCluster,
+    evt: { timeMoment: IMoment },
     leftRender: number,
     descrWidthRedner: number,
     widthRender: number,
