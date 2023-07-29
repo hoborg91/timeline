@@ -9,7 +9,9 @@ export interface ITextWizard {
 export class StringUtils implements ITextWizard {
     private _langs: string[];
     private _allTexts: { key: string, loc: IMultiLangString }[];
-
+    private _checkLocRegex = new RegExp("\\{\\d+\\}", "gi");
+    private _paramRegs = Array(5).fill(1).map((_, i) => new RegExp(`\\{${i}\\}`, "gi"));
+    
     constructor(preferredLanguages: readonly string[]) {
         this._langs = [];
         let enAdded = false, enUsAdded = false;
@@ -46,13 +48,21 @@ export class StringUtils implements ITextWizard {
         }
         let result = strNoParams;
         for (let pi = 0; pi < params.length; pi++) {
-            const reg = new RegExp("\\{" + pi + "\\}", "gi");
+            const reg = this.regForParam(pi);
             const paramStr = this.locValue(params[pi]);
             result = result.replace(reg, paramStr);
         }
-        if (new RegExp("\\{" + "\\d+" + "\\}", "gi").test(result))
+        if (this._checkLocRegex.test(result))
             throw new Error(`No enough parameter values for text "${strNoParams}".`);
         return result;
+    }
+
+    private regForParam(i: number) {
+        if (i < this._paramRegs.length) {
+            return this._paramRegs[i];
+        }
+
+        return new RegExp("\\{" + i + "\\}", "gi");
     }
 
     private locValue(val: any) {
