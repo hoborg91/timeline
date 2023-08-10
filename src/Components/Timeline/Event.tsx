@@ -1,5 +1,4 @@
 import React, { SyntheticEvent } from "react";
-import { IDateFormat } from "../../contracts/timeline";
 import { IEventCluster } from "../ifaces";
 import { compact } from "./utils";
 
@@ -48,16 +47,18 @@ const EventImageSingle = ({ url, leftRender, cluster, onCenter }: {
         setLeft(newLeft + "px");
         onCenter(newLeft + imgWidthRender / 2);
     };
-    return <img
-        src={url}
-        onLoad={onLoad}
-        style={{
-            height: singleImageHeightRender + "px",
-            position: "absolute" as const,
-            left,
-            top: "0px",
-        }}
-        className="EventImageSingle" />;
+    return <a href={url}>
+        <img
+            src={url}
+            onLoad={onLoad}
+            style={{
+                height: singleImageHeightRender + "px",
+                position: "absolute" as const,
+                left,
+                top: "0px",
+            }}
+            className="EventImageSingle" />
+    </a>;
 }
 
 const doubleImageHeightRender = 50;
@@ -121,16 +122,20 @@ const EventImageDouble = ({ urls, leftRender, widthRender, cluster, onCenter }: 
         style={{ position: "absolute" as const, left: geom.left, top: "0px" }}
         className="EventImageDouble"
         >
-            <img src={urls[0]} onLoad={onLoad0} style={{
-                height: doubleImageHeightRender + "px",
-                maxWidth: (doubleImageHeightRender * 1.1) + "px",
-                objectFit: "cover",
-            }} />
-            <img src={urls[1]} onLoad={onLoad1} style={{
-                height: doubleImageHeightRender + "px",
-                maxWidth: (doubleImageHeightRender * 1.1) + "px",
-                objectFit: "cover",
-            }} />
+            <a href={urls[0]}>
+                <img src={urls[0]} onLoad={onLoad0} style={{
+                    height: doubleImageHeightRender + "px",
+                    maxWidth: (doubleImageHeightRender * 1.1) + "px",
+                    objectFit: "cover",
+                }} />
+            </a>
+            <a href={urls[1]}>
+                <img src={urls[1]} onLoad={onLoad1} style={{
+                    height: doubleImageHeightRender + "px",
+                    maxWidth: (doubleImageHeightRender * 1.1) + "px",
+                    objectFit: "cover",
+                }} />
+            </a>
         </div>;
 }
 
@@ -182,11 +187,12 @@ const EventImageMany = ({ urls, leftRender, widthRender, cluster, onCenter }: {
         style={{ position: "absolute" as const, left: left + "px", top: "0px" }}
         className="EventImageMany"
         >
-            {imgRef.map(ir => <img
-                src={ir.url}
-                style={{ ...imgStyle, left: (maxDim * ir.col) + "px", top: (maxDim * ir.row) + "px" }}
-                id={ir.url}
-                key={ir.url} />)}
+            {imgRef.map(ir => <a href={ir.url} key={ir.url}>
+                <img
+                    src={ir.url}
+                    style={{ ...imgStyle, left: (maxDim * ir.col) + "px", top: (maxDim * ir.row) + "px" }}
+                    id={ir.url} />
+            </a>)}
         </div>;
 }
 

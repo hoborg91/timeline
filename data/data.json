@@ -222,6 +222,12 @@
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/%D0%9F%D0%B8%D0%BE%D0%BD%D0%B5%D1%80%D1%81%D0%BA%D0%B8%D0%B9_%D0%BA%D0%BE%D1%81%D1%82%D0%B5%D1%80_-_panoramio.jpg/320px-%D0%9F%D0%B8%D0%BE%D0%BD%D0%B5%D1%80%D1%81%D0%BA%D0%B8%D0%B9_%D0%BA%D0%BE%D1%81%D1%82%D0%B5%D1%80_-_panoramio.jpg"
 		},
 		{
+			"cpt": { "en": "Spear", "ru": "Копьё" },
+			"time": { "fmt": "y", "val": -400000 },
+			"scal": { "fmt": "y", "val": 10000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Clacton_Spear_02.jpg/302px-Clacton_Spear_02.jpg"
+		},
+		{
 			"cpt": { "en": "Early modern human", "ru": "Человек разумный" },
 			"time": { "fmt": "y", "val": -200000 },
 			"scal": { "fmt": "y", "val": 10000 },
@@ -234,10 +240,22 @@
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Fleche_Font_Robert_231.4_(4).jpg/319px-Fleche_Font_Robert_231.4_(4).jpg"
 		},
 		{
+			"cpt": { "en": "Cave painting", "ru": "Наскальная живопись" },
+			"time": { "fmt": "y", "val": -40000 },
+			"scal": { "fmt": "y", "val": 1000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Lions_painting%2C_Chauvet_Cave_%28museum_replica%29.jpg/281px-Lions_painting%2C_Chauvet_Cave_%28museum_replica%29.jpg"
+		},
+		{
 			"cpt": { "en": "Neolithic Revolution", "ru": "Неолитическая революция" },
 			"time": { "fmt": "y", "val": -10000 },
 			"scal": { "fmt": "y", "val": 1000 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Molino_neol%C3%ADtico_de_vaiv%C3%A9n.jpg/320px-Molino_neol%C3%ADtico_de_vaiv%C3%A9n.jpg"
+		},
+		{
+			"cpt": { "en": "Irrigation", "ru": "Орошение" },
+			"time": { "fmt": "y", "val": -6000 },
+			"scal": { "fmt": "y", "val": 1000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/LevelBasinFloodIrrigation.JPG/320px-LevelBasinFloodIrrigation.JPG"
 		},
 		{
 			"cpt": { "en": "Metallurgy", "ru": "Металлургия" },
@@ -252,10 +270,22 @@
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Ljubljana_Marshes_Wheel_with_axle_%28oldest_wooden_wheel_yet_discovered%29.jpg/314px-Ljubljana_Marshes_Wheel_with_axle_%28oldest_wooden_wheel_yet_discovered%29.jpg"
 		},
 		{
+			"cpt": { "en": "Ard", "ru": "Рало" },
+			"time": { "fmt": "y", "val": -4000 },
+			"scal": { "fmt": "y", "val": 1000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Maler_der_Grabkammer_des_Sennudem_001.jpg/320px-Maler_der_Grabkammer_des_Sennudem_001.jpg"
+		},
+		{
 			"cpt": { "en": "Writing", "ru": "Письменность" },
 			"time": { "fmt": "y", "val": -3500 },
 			"scal": { "fmt": "y", "val": 100 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Tableta_con_trillo.png"
+		},
+		{
+			"cpt": { "en": "State", "ru": "Государство" },
+			"time": { "fmt": "y", "val": -3500 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Tomb_100_Hierakompolis%2C_Naqada_II_culture_%28c._3500-3200_BCE%29.jpg/320px-Tomb_100_Hierakompolis%2C_Naqada_II_culture_%28c._3500-3200_BCE%29.jpg"
 		},
 		{
 			"cpt": { "en": "Late Bronze Age collapse", "ru": "Катастрофа бронзового века" },
@@ -270,8 +300,20 @@
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Four_Scenes_from_the_Life_of_the_Buddha_-_Enlightenment_-_Kushan_dynasty%2C_late_2nd_to_early_3rd_century_AD%2C_Gandhara%2C_schist_-_Freer_Gallery_of_Art_-_DSC05124.JPG/320px-thumbnail.jpg"
 		},
 		{
+			"cpt": { "en": "Compass", "ru": "Компас" },
+			"time": { "fmt": "y", "val": -206 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Model_Si_Nan_of_Han_Dynasty.jpg/320px-Model_Si_Nan_of_Han_Dynasty.jpg"
+		},
+		{
+			"cpt": { "en": "Paper", "ru": "Бумага" },
+			"time": { "fmt": "y", "val": -179 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Fangmatan_paper_map.jpg"
+		},
+		{
 			"cpt": { "en": "Christianity", "ru": "Христианство" },
-			"time": { "fmt": "y", "val": 1 },
+			"time": { "fmt": "y", "val": 30 },
 			"scal": { "fmt": "y", "val": 100 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Chartres2006_039.jpg/303px-Chartres2006_039.jpg"
 		},
@@ -286,6 +328,12 @@
 			"time": { "fmt": "y", "val": 610 },
 			"scal": { "fmt": "y", "val": 100 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/The_Ka%27ba%2C_Great_Mosque_of_Mecca%2C_Saudi_Arabia_%284%29.jpg/320px-The_Ka%27ba%2C_Great_Mosque_of_Mecca%2C_Saudi_Arabia_%284%29.jpg"
+		},
+		{
+			"cpt": { "en": "Printing", "ru": "Книгопечатание" },
+			"time": { "fmt": "y", "val": 1041 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/4/41/Mengxi_bitan.jpg"
 		},
 		{
 			"cpt": { "en": "Firearm", "ru": "Огнестрельное оружие" },
@@ -312,6 +360,12 @@
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Battle_of_Gibraltar_1607.jpg/320px-Battle_of_Gibraltar_1607.jpg"
 		},
 		{
+			"cpt": { "en": "Differential calculus", "ru": "Дифференциальное исчисление" },
+			"time": { "fmt": "y", "val": 1675 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Tangent_to_a_curve.svg/320px-Tangent_to_a_curve.svg.png"
+		},
+		{
 			"cpt": { "en": "French Revolution", "ru": "Революция во Франции" },
 			"time": { "fmt": "y", "val": 1789 },
 			"scal": { "fmt": "y", "val": 100 },
@@ -330,6 +384,30 @@
 			"img": "https://upload.wikimedia.org/wikipedia/commons/7/78/Killingworth-locomotive.jpg"
 		},
 		{
+			"cpt": { "en": "Electric motor and electric generator", "ru": "Электродвигатель и электрогенератор" },
+			"time": { "fmt": "y", "val": 1820 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Faraday_disk_generator.jpg/307px-Faraday_disk_generator.jpg"
+		},
+		{
+			"cpt": { "en": "Automobile with internal combustion engine", "ru": "Автомобиль с двигателем внутреннего сгорания" },
+			"time": { "fmt": "y", "val": 1885 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Patent-Motorwagen_Nr.1_Benz_2.jpg/320px-Patent-Motorwagen_Nr.1_Benz_2.jpg"
+		},
+		{
+			"cpt": { "en": "Germ theory of disease", "ru": "Микробная теория возникновения болезней" },
+			"time": { "fmt": "y", "val": 1890 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Cholera_bacteria_SEM.jpg/307px-Cholera_bacteria_SEM.jpg"
+		},
+		{
+			"cpt": { "en": "Aviation", "ru": "Авиация" },
+			"time": { "fmt": "y", "val": 1903 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Wrightflyer.jpg/320px-Wrightflyer.jpg"
+		},
+		{
 			"cpt": { "en": "Russian Revolution", "ru": "Революция в России" },
 			"time": { "fmt": "y", "val": 1917 },
 			"scal": { "fmt": "y", "val": 100 },
@@ -340,6 +418,12 @@
 			"time": { "fmt": "y", "val": 1928 },
 			"scal": { "fmt": "y", "val": 100 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Staphylococcus_aureus_%28AB_Test%29.jpg/265px-Staphylococcus_aureus_%28AB_Test%29.jpg"
+		},
+		{
+			"cpt": { "en": "Nuclear weapon", "ru": "Ядерное оружие" },
+			"time": { "fmt": "y", "val": 1947 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Trinity_Detonation_T%26B.jpg/320px-Trinity_Detonation_T%26B.jpg"
 		},
 		{
 			"cpt": { "en": "Transistor", "ru": "Транзистор" },
@@ -358,6 +442,12 @@
 			"time": { "fmt": "y", "val": 1991 },
 			"scal": { "fmt": "y", "val": 100 },
 			"img": "https://upload.wikimedia.org/wikipedia/ru/thumb/7/7e/%D0%A2%D0%B0%D0%BD%D0%BA%D0%B8_%D0%BD%D0%B0_%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B9_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D0%B8_1991_%D0%B3%D0%BE%D0%B4.jpg/320px-%D0%A2%D0%B0%D0%BD%D0%BA%D0%B8_%D0%BD%D0%B0_%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B9_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D0%B8_1991_%D0%B3%D0%BE%D0%B4.jpg"
+		},
+		{
+			"cpt": { "en": "Internet", "ru": "Интернет" },
+			"time": { "fmt": "y", "val": 1995 },
+			"scal": { "fmt": "y", "val": 100 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Internet_map_1024_-_transparent%2C_inverted.png/240px-Internet_map_1024_-_transparent%2C_inverted.png"
 		}
 	]
 }
