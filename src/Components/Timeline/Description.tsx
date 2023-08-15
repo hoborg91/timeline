@@ -25,6 +25,10 @@ const Caption = ({ cluster, leftRender }: {
         renderedCount = cluster.events.length > maxEventsCount
             ? (maxEventsCount - 1)
             : cluster.events.length;
+        if (renderedCount === 0) {
+            mainPart = null;
+            break;
+        }
         mainPart = cluster.events
             .slice(0, renderedCount)
             .map(e => ctx.text.toString(e.cpt) ?? ctx.text.locResource("unkevt"))
