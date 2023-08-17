@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import { BsChevronBarDown, BsChevronBarUp, BsTrash } from "react-icons/bs";
-import { Context } from "../../context";
+import { PureDi } from "../../context";
 import { IUniFmtInterval } from "../../contracts/timeline";
 
 export const LineSettingsComponent = ({ interval, color, remove, edit, moveUp, moveDown }: {
@@ -12,7 +12,7 @@ export const LineSettingsComponent = ({ interval, color, remove, edit, moveUp, m
     moveUp: (() => any) | null,
     moveDown: (() => any) | null,
 }) => {
-    const ctx = React.useContext(Context);
+    const di = React.useContext(PureDi);
 
     const onChange1 = (e: any) => {
         const nm = e.target.name as keyof IUniFmtInterval;
@@ -23,29 +23,29 @@ export const LineSettingsComponent = ({ interval, color, remove, edit, moveUp, m
     return <div>
         <InputGroup size="sm" className="mb-3">
             <Form.Select
-                aria-label={ctx.text.locResource("fmt")}
+                aria-label={di.text.locResource("fmt")}
                 name="fmt"
                 defaultValue={interval.fmt}
                 onChange={onChange1}
             >
-                <option value="y">{ctx.text.locResource("years")}</option>
-                <option value="my">{ctx.text.locResource("millionyears")}</option>
+                <option value="y">{di.text.locResource("years")}</option>
+                <option value="my">{di.text.locResource("millionyears")}</option>
             </Form.Select>
             <Form.Control
                 name="fromVal"
                 defaultValue={interval.fromVal}
                 onChange={onChange1}
                 type="number"
-                placeholder={ctx.text.locResource("from")}
-                aria-label={ctx.text.locResource("from")}
+                placeholder={di.text.locResource("from")}
+                aria-label={di.text.locResource("from")}
             />
             <Form.Control
                 name="tillVal"
                 defaultValue={interval.tillVal}
                 onChange={onChange1}
                 type="number"
-                placeholder={ctx.text.locResource("till")}
-                aria-label={ctx.text.locResource("till")}
+                placeholder={di.text.locResource("till")}
+                aria-label={di.text.locResource("till")}
             />
             <Form.Control
                 type="color"

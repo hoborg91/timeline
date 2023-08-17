@@ -2,7 +2,7 @@ import React from "react";
 import { IEvent, ILineSettings, Interval, Moment } from "../../contracts/timeline";
 import { Mapping } from "../../Services/time";
 import { IEventCluster, ILineReference } from "../ifaces";
-import { Context, IDimensions } from "../../context";
+import { PureDi, IDimensions } from "../../context";
 import { ClusterAndDescr } from "./ClusterAndDescr";
 
 function _clusterSettings(dims: IDimensions) {
@@ -74,10 +74,10 @@ function _makeRowRef(
 export const MainLine = ({ lineSettings, lsi, curRef }: 
     { lineSettings: ILineSettings[], lsi: number, curRef: ILineReference }
 ) => {
-    const ctx = React.useContext(Context);
+    const di = React.useContext(PureDi);
     const ls = lineSettings[lsi];
-    const mapping = new Mapping(ctx.dimensions.mainTdWidth, ls.interval, ctx.time);
-    const rowRef = _makeRowRef(curRef, mapping, ctx.dimensions);
+    const mapping = new Mapping(di.dimensions.mainTdWidth, ls.interval, di.time);
+    const rowRef = _makeRowRef(curRef, mapping, di.dimensions);
 
     const evtTsxs = [];
     
@@ -89,20 +89,20 @@ export const MainLine = ({ lineSettings, lsi, curRef }:
 
     const style = {
         backgroundColor: curRef.mainColor,
-        width: ctx.dimensions.mainTdWidth + "px",
-        height: ctx.dimensions.mainTdHeight + "px",
+        width: di.dimensions.mainTdWidth + "px",
+        height: di.dimensions.mainTdHeight + "px",
         position: "relative" as const,
     };
     
     return <tr className="MainLine">
-        <td style={{ textAlign: "right", width: ctx.dimensions.sideTdWidth + "px" }}>
-            {ctx.timeFormatter.format(curRef.minMoment)}
+        <td style={{ textAlign: "right", width: di.dimensions.sideTdWidth + "px" }}>
+            {di.timeFormatter.format(curRef.minMoment)}
         </td>
         <td style={style}>
             {evtTsxs}
         </td>
-        <td style={{ width: ctx.dimensions.sideTdWidth + "px" }}>
-            {ctx.timeFormatter.format(curRef.maxMoment)}
+        <td style={{ width: di.dimensions.sideTdWidth + "px" }}>
+            {di.timeFormatter.format(curRef.maxMoment)}
         </td>
     </tr>;
 }

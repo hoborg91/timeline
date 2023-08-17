@@ -1,7 +1,7 @@
 import React from "react";
-import { Context } from "../../context";
+import { PureDi } from "../../context";
 import { ITimeWizard } from "../../Services/time"
-import { IDateFormat, IEvent, ILineSettings, Moment } from "../../contracts/timeline";
+import { IEvent, ILineSettings, Moment } from "../../contracts/timeline";
 import { Throw } from "../../utils";
 import { InterLine } from "./InterLine";
 import { MainLine } from "./MainLine";
@@ -39,7 +39,6 @@ function _makeRef(
             const rLen = time.ConvertTo(r.len, r.ls.interval.fmt, evt.time.fmt);
             const scalVal = time.ConvertTo(scal, evt.time.fmt).val;
             if (true
-                //&& r.ls.interval.fmt === evt.time.fmt
                 && rLen >= scalVal
                 && time.Contains(r.ls.interval, evt.time)
                 && (minLen === null || rLen < minLen)
@@ -61,18 +60,18 @@ export const TimeLine = ({ lineSettings, allEvents }: {
     lineSettings: ILineSettings[],
     allEvents: IEvent[]
 }) => {
-    const ctx = React.useContext(Context);
+    const di = React.useContext(PureDi);
 
-    const refe = _makeRef(lineSettings, allEvents, ctx.time);
+    const refe = _makeRef(lineSettings, allEvents, di.time);
 
     const trTsxs = lineSettings
-        .map((ls, lsi) => [
+        .map((_, lsi) => [
             <MainLine lineSettings={lineSettings} lsi={lsi} curRef={refe[lsi]} key={"MainLine" + lsi} />,
             <InterLine lineSettings={lineSettings} lsi={lsi} refe={refe} key={"InterLine" + lsi} />]
         )
         .flat();
 
-    const tableWidth = ctx.dimensions.mainTdWidth + ctx.dimensions.sideTdWidth * 2;
+    const tableWidth = di.dimensions.mainTdWidth + di.dimensions.sideTdWidth * 2;
 
     return <table style={{ width: tableWidth + "px" }} className="TimeLine">
         <tbody>{trTsxs}</tbody>

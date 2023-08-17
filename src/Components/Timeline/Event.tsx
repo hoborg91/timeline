@@ -206,7 +206,7 @@ export const EventImageMontage = ({ cluster, leftRender, widthRender, ci, onCent
     cluster: IEventCluster,
     leftRender: number,
     widthRender: number,
-    ci: number, // for z-index
+    ci: number, // for z-index // TODO Remove?
     onCenter: (centerRnd: number) => any,
 }) => {
     const images = cluster.events

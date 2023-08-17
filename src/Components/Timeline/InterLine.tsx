@@ -1,5 +1,5 @@
 import React from "react";
-import { Context } from "../../context";
+import { PureDi } from "../../context";
 import { ILineSettings, Interval } from "../../contracts/timeline";
 import { ILineReference } from "../ifaces";
 
@@ -16,9 +16,9 @@ export const InterLine = ({ lineSettings, lsi, refe }: {
     const curRef = refe[lsi];
     const nextRef = refe[lsi + 1];
 
-    const ctx = React.useContext(Context);
+    const di = React.useContext(PureDi);
 
-    const intersection = ctx.time.GetIntersection(
+    const intersection = di.time.GetIntersection(
         Interval(ls.interval.fmt, curRef.min, curRef.max),
         Interval(nextLs.interval.fmt, nextRef.min, nextRef.max)
     );
@@ -28,13 +28,13 @@ export const InterLine = ({ lineSettings, lsi, refe }: {
     }
 
     const
-        h100 = ctx.dimensions.mainTdHeight, h50 = Math.ceil(ctx.dimensions.mainTdHeight / 2),
-        up1 = ctx.dimensions.mainTdWidth * (intersection.isc1.fromVal - curRef.min) / curRef.len,
-        up2 = ctx.dimensions.mainTdWidth * (intersection.isc1.tillVal - curRef.min) / curRef.len,
-        lo1 = ctx.dimensions.mainTdWidth * (intersection.isc2.fromVal - nextRef.min) / nextRef.len,
-        lo2 = ctx.dimensions.mainTdWidth * (intersection.isc2.tillVal - nextRef.min) / nextRef.len;
+        h100 = di.dimensions.mainTdHeight, h50 = Math.ceil(di.dimensions.mainTdHeight / 2),
+        up1 = di.dimensions.mainTdWidth * (intersection.isc1.fromVal - curRef.min) / curRef.len,
+        up2 = di.dimensions.mainTdWidth * (intersection.isc1.tillVal - curRef.min) / curRef.len,
+        lo1 = di.dimensions.mainTdWidth * (intersection.isc2.fromVal - nextRef.min) / nextRef.len,
+        lo2 = di.dimensions.mainTdWidth * (intersection.isc2.tillVal - nextRef.min) / nextRef.len;
     const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${ctx.dimensions.mainTdWidth} ${h100}">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${di.dimensions.mainTdWidth} ${h100}">
         <defs>
             <linearGradient fx="0" fy="0.49" id="svg_1" x2="0" y2="1">
                 <stop id="jq_stop_3595" offset="0" stop-color="${curRef.mainColor}"/>

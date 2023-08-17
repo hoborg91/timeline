@@ -3,7 +3,7 @@ export function compact(
     imgWidthRender: number,
     scopeRender: { min: number, max: number }
 ) {
-    let lr = leftRender;// - imgWidthRender / 2;
+    let lr = leftRender;
     if (lr < scopeRender.min)
         lr = scopeRender.min;
     else if (lr + imgWidthRender > scopeRender.max)

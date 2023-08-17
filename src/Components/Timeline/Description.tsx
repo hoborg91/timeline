@@ -1,6 +1,6 @@
 import React from "react";
 import { OverlayTrigger, Popover } from "react-bootstrap";
-import { Context } from "../../context";
+import { PureDi } from "../../context";
 import { IMoment } from "../../contracts/timeline";
 import { IEventCluster } from "../ifaces";
 import { compact } from "./utils";
@@ -11,12 +11,12 @@ const Caption = ({ cluster, leftRender }: {
 }) => {
     // TODO https://stackoverflow.com/questions/37406353/make-container-shrink-to-fit-child-elements-as-they-wrap
 
-    const ctx = React.useContext(Context);
+    const di = React.useContext(PureDi);
 
     if (cluster.events.length === 1) {
         const evt = cluster.events[0];
-        const text  = ctx.text.toString(evt.cpt) ?? ctx.text.locResource("unkevt");
-        return <div>{text}<br /><small>{ctx.timeFormatter.format(evt.time)}</small></div>;
+        const text  = di.text.toString(evt.cpt) ?? di.text.locResource("unkevt");
+        return <div>{text}<br /><small>{di.timeFormatter.format(evt.time)}</small></div>;
     }
 
     let mainPart = null as string | null;
@@ -31,7 +31,7 @@ const Caption = ({ cluster, leftRender }: {
         }
         mainPart = cluster.events
             .slice(0, renderedCount)
-            .map(e => ctx.text.toString(e.cpt) ?? ctx.text.locResource("unkevt"))
+            .map(e => di.text.toString(e.cpt) ?? di.text.locResource("unkevt"))
             .reduce((acc, add) => acc + ", " + add);
     }
     
@@ -39,40 +39,27 @@ const Caption = ({ cluster, leftRender }: {
     const extraCount = cluster.events.length - renderedCount;
     if (extraCount > 0) {
         extraPart = renderedCount > 0
-            ? `${ctx.text.locResource("and_otherevts", extraCount)}`
-            : `${ctx.text.locResource("_evts", extraCount)}`;
+            ? `${di.text.locResource("and_otherevts", extraCount)}`
+            : `${di.text.locResource("_evts", extraCount)}`;
     }
 
     const popover = (
         <Popover>
             <Popover.Body>
                 <ul>
-                    {cluster.events.map((e, ei) => <li key={ei}>{ctx.text.toString(e.cpt) ?? ctx.text.locResource("unkevt")} ({ctx.timeFormatter.format(e.time)})</li>)}
+                    {cluster.events.map((e, ei) => <li key={ei}>{di.text.toString(e.cpt) ?? di.text.locResource("unkevt")} ({di.timeFormatter.format(e.time)})</li>)}
                 </ul>
             </Popover.Body>
         </Popover>
     );
 
-    const placement = leftRender <= ctx.dimensions.mainTdWidth / 2
+    const placement = leftRender <= di.dimensions.mainTdWidth / 2
         ? "right"
         : "left";
 
     return <OverlayTrigger trigger="click" placement={placement} overlay={popover}>
         <div>{mainPart} <i>{extraPart}</i></div>
     </OverlayTrigger>;
-}
-
-const Date = ({ cluster, evt }: {
-    cluster: IEventCluster,
-    evt: { timeMoment: IMoment },
-}) => {
-    const ctx = React.useContext(Context);
-
-    if (cluster.events.length === 1) {
-        return <div><small>{ctx.timeFormatter.format(evt.timeMoment)}</small></div>;
-    }
-
-    return <div><small>{ctx.timeFormatter.format(cluster.intervalReal)}</small></div>;
 }
 
 export const Description = ({ci, cluster, evt, leftRender, descrWidthRedner, widthRender, eventImageMontageCenter }: {
@@ -84,7 +71,7 @@ export const Description = ({ci, cluster, evt, leftRender, descrWidthRedner, wid
     widthRender: number,
     eventImageMontageCenter: number,
 }) => {
-    const dims = React.useContext(Context).dimensions;
+    const dims = React.useContext(PureDi).dimensions;
     const compacted = compact(eventImageMontageCenter - descrWidthRedner / 2, descrWidthRedner, cluster.scopeRender);
     
     const style = {
@@ -111,6 +98,5 @@ export const Description = ({ci, cluster, evt, leftRender, descrWidthRedner, wid
     });
     return <div style={style} ref={myRef} className="Description">
         <Caption cluster={cluster} leftRender={leftRender} />
-        {/* <Date cluster={cluster} evt={evt} /> */}
     </div>;
 }

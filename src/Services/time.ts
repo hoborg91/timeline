@@ -142,8 +142,6 @@ export class Mapping {
     }
 
     public FromRealToRender(moment: IMoment): number {
-        // if (moment.fmt !== this._real.fmt)
-        //     throw new Error("Different date formats are not supported.");
         const convMoment = this._time.ConvertTo(moment, this._real.fmt);
         
         const difReal = convMoment.val - this._real.fromVal;

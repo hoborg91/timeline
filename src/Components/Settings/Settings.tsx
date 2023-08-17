@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
-import { Context } from "../../context";
-import { IDateFormat, ILineSettings, IUniFmtInterval, LineSettings } from "../../contracts/timeline";
+import { PureDi } from "../../context";
+import { ILineSettings, IUniFmtInterval, LineSettings } from "../../contracts/timeline";
 import { LineSettingsComponent } from "./LineSettingsComponent";
 import { BsCheckCircle, BsXCircle } from "react-icons/bs";
 import allPalette from "../../../data/palette.json";
@@ -16,7 +16,7 @@ export const Settings = ({ currentSettings, apply }: {
     currentSettings: ILineSettings[],
     apply: (newSettings: ILineSettings[]) => any,
 }) => {
-    const ctx = React.useContext(Context);
+    const di = React.useContext(PureDi);
 
     const [settings, setSettings] = React.useState(
         currentSettings.map(ls => ({ ls, renderKey: newKey() })));
@@ -93,12 +93,12 @@ export const Settings = ({ currentSettings, apply }: {
 
     return <div style={{ display: "inline-block" }}>
         <Button size="sm" variant="primary" onClick={handleShow}>
-            {ctx.text.locResource("settings")}
+            {di.text.locResource("settings")}
         </Button>
 
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>{ctx.text.locResource("settings")}</Modal.Title>
+                <Modal.Title>{di.text.locResource("settings")}</Modal.Title>
             </Modal.Header>
             
             {settings.map((ls, lsi) => <LineSettingsComponent
@@ -115,15 +115,15 @@ export const Settings = ({ currentSettings, apply }: {
                 onClick={addLine}
                 disabled={settings.length >= maxLinesCount}
             >
-                {ctx.text.locResource("addline")}
+                {di.text.locResource("addline")}
             </Button>
             
             <Modal.Footer>
                 <Button size="sm" variant="secondary" onClick={discard}>
-                    <BsXCircle /> {ctx.text.locResource("discardchanges")}
+                    <BsXCircle /> {di.text.locResource("discardchanges")}
                 </Button>
                 <Button size="sm" variant="primary" onClick={save}>
-                    <BsCheckCircle /> {ctx.text.locResource("savechanges")}
+                    <BsCheckCircle /> {di.text.locResource("savechanges")}
                 </Button>
             </Modal.Footer>
         </Modal>

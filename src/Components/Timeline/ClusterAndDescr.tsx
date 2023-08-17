@@ -1,25 +1,24 @@
 import React, { useState } from "react";
-import { Context } from "../../context";
+import { PureDi } from "../../context";
 import { IEventCluster, ILineReference } from "../ifaces";
 import { Description } from "./Description";
 import { EventImageMontage } from "./Event";
-import { compact } from "./utils";
 
 export const ClusterAndDescr = ({ cluster, curRef }: {
     cluster: IEventCluster,
     curRef: ILineReference,
 }) => {
-    const ctx = React.useContext(Context);
+    const di = React.useContext(PureDi);
     
-    const relToRnd = (rel: number) => rel * ctx.dimensions.mainTdWidth / curRef.len;
+    const relToRnd = (rel: number) => rel * di.dimensions.mainTdWidth / curRef.len;
 
     const leftRnd = relToRnd(cluster.minReal.val - curRef.min);
     const widthRnd = relToRnd(cluster.maxReal.val - cluster.minReal.val);
 
     let debug = <></>;
-    if (ctx.devMode) {
+    if (di.devMode) {
         const styleOuter = {
-            border: ctx.devMode ? "1px solid grey" : "none",
+            border: di.devMode ? "1px solid grey" : "none",
             position: "absolute" as const,
             left: (cluster.scopeRender.min + 2) + "px",
             top: "0px",
@@ -28,7 +27,7 @@ export const ClusterAndDescr = ({ cluster, curRef }: {
             zIndex: 1000,
         };
         const styleInner = {
-            border: ctx.devMode ? "1px solid red" : "none",
+            border: di.devMode ? "1px solid red" : "none",
             position: "absolute" as const,
             left: leftRnd + "px",
             top: "0px",
@@ -47,11 +46,6 @@ export const ClusterAndDescr = ({ cluster, curRef }: {
     const descrWidthRed = 4;
 
     const descrWidthRender = cluster.scopeRender.max - cluster.scopeRender.min - descrWidthRed * 2;
-    const l1 = compact(
-        (leftRnd + descrWidthRender / 2),
-        descrWidthRender,
-        cluster.scopeRender
-    );
 
     const onCenter = (centerRnd: number) => {
         window.requestAnimationFrame(() => {

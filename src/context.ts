@@ -24,7 +24,7 @@ export type IDimensions = Readonly<{
 const mainTdWidth = 1000, 
       sideTdWidth = 100;
 
-export const Context = React.createContext<{
+export const PureDi = React.createContext<{
     setLanguage: (language: LangMonkier) => any,
     text: ITextWizard,
     time: ITimeWizard,

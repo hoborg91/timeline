@@ -5,13 +5,13 @@ import { TimeLine } from "./Components/Timeline/Timeline";
 import { IEvent, ILineSettings, LineSettings } from "./contracts/timeline";
 import allPalette from "../data/palette.json";
 import { LanguageSelection } from "./Components/Settings/LanguageSelection";
-import { Context } from "./context";
+import { PureDi } from "./context";
 import { LangMonkier } from "./contracts/text";
 
 const _palette = allPalette.standard as string[];
 
 export const App = () => {
-    const ctx = React.useContext(Context);
+    const di = React.useContext(PureDi);
 
     const setForceUpdateDummy = React.useState(0)[1];
     const forceUpdate = () => setForceUpdateDummy(x => x + 1);
@@ -33,7 +33,7 @@ export const App = () => {
     const allEvents = all.events as IEvent[];
 
     const changeLang = (lang: LangMonkier) => {
-        ctx.setLanguage(lang);
+        di.setLanguage(lang);
         forceUpdate();
     };
 

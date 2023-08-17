@@ -1,4 +1,4 @@
-import { IDateFormat, IMoment, IUniFmtInterval, Moment } from "../contracts/timeline";
+import { IMoment, IUniFmtInterval, Moment } from "../contracts/timeline";
 import { Throw } from "../utils";
 import { ITextWizard } from "./text";
 
