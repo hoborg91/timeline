@@ -2,7 +2,7 @@ import React from "react";
 import all from "../data/data.json";
 import { Settings } from "./Components/Settings/Settings";
 import { TimeLine } from "./Components/Timeline/Timeline";
-import { IDateFormat, IEvent, ILineSettings, LineSettings } from "./contracts/timeline";
+import { IEvent, ILineSettings, LineSettings } from "./contracts/timeline";
 import allPalette from "../data/palette.json";
 import { LanguageSelection } from "./Components/Settings/LanguageSelection";
 import { Context } from "./context";
@@ -24,12 +24,10 @@ export const App = () => {
     }
     const [lineSettings, setLineSettings] = React.useState([
         LineSettings(color(), "my", -14000, 1),
-        LineSettings(color(), "my", -2500, 1),
-        LineSettings(color(), "my", -300, 1),
-        LineSettings(color(), "y", -2000000, 2000),
+        LineSettings(color(), "my", -650, 1),
+        LineSettings(color(), "my", -10, 1),
         LineSettings(color(), "y", -10000, 2000),
-        LineSettings(color(), "y", -1000, 2000),
-        LineSettings(color(), "y", 1400, 2000),
+        LineSettings(color(), "y", 1000, 2000),
         LineSettings(color(), "y", 1900, 2000),
     ] as ILineSettings[]);
     const allEvents = all.events as IEvent[];

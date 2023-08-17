@@ -192,10 +192,28 @@
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Ouranopithecus_macedoniensis.jpg/634px-Ouranopithecus_macedoniensis.jpg"
 		},
 		{
+			"cpt": { "en": "Orrorin", "ru": "Оррорин" },
+			"time": { "fmt": "y", "val": -6100000 },
+			"scal": { "fmt": "y", "val": 100000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Orrorin_tugenensis.jpg"
+		},
+		{
+			"cpt": { "en": "Ardipithecus", "ru": "Ардипитек" },
+			"time": { "fmt": "y", "val": -5600000 },
+			"scal": { "fmt": "y", "val": 100000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Ardi.jpg"
+		},
+		{
 			"cpt": { "en": "Australopithecus", "ru": "Австралопитек" },
 			"time": { "fmt": "y", "val": -4200000 },
 			"scal": { "fmt": "y", "val": 100000 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Australopithecus_sediba_%28Fundort_Malapa%29.jpg/320px-Australopithecus_sediba_%28Fundort_Malapa%29.jpg"
+		},
+		{
+			"cpt": { "en": "First stone tools", "ru": "Первые каменные орудия" },
+			"time": { "fmt": "y", "val": -3300000 },
+			"scal": { "fmt": "y", "val": 10000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Pierre_taill%C3%A9e_Melka_Kunture_%C3%89thiopie_fond.jpg/289px-Pierre_taill%C3%A9e_Melka_Kunture_%C3%89thiopie_fond.jpg"
 		},
 		{
 			"cpt": { "en": "Chopper", "ru": "Чоппер" },
@@ -205,9 +223,15 @@
 		},
 		{
 			"cpt": { "en": "Homo habilis", "ru": "Человек умелый" },
+			"time": { "fmt": "y", "val": -2310000 },
+			"scal": { "fmt": "y", "val": 10000 },
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Homo_habilis_-_forensic_facial_reconstruction.png/202px-Homo_habilis_-_forensic_facial_reconstruction.png"
+		},
+		{
+			"cpt": { "en": "Homo erectus", "ru": "Человек прямоходящий" },
 			"time": { "fmt": "y", "val": -2000000 },
 			"scal": { "fmt": "y", "val": 10000 },
-			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Homo_habilis_in_Kulturama.jpg/196px-Homo_habilis_in_Kulturama.jpg"
+			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Homo_erectus_reconstruction%2C_Natural_History_Museum%2C_London.jpg/320px-Homo_erectus_reconstruction%2C_Natural_History_Museum%2C_London.jpg"
 		},
 		{
 			"cpt": { "en": "Hand axe", "ru": "Рубило" },
@@ -228,8 +252,8 @@
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Clacton_Spear_02.jpg/302px-Clacton_Spear_02.jpg"
 		},
 		{
-			"cpt": { "en": "Early modern human", "ru": "Человек разумный" },
-			"time": { "fmt": "y", "val": -200000 },
+			"cpt": { "en": "Homo sapiens", "ru": "Человек разумный" },
+			"time": { "fmt": "y", "val": -315000 },
 			"scal": { "fmt": "y", "val": 10000 },
 			"img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Human.svg/193px-Human.svg.png"
 		},
