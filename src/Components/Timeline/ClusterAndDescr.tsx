@@ -54,7 +54,9 @@ export const ClusterAndDescr = ({ cluster, curRef }: {
     );
 
     const onCenter = (centerRnd: number) => {
-        setEventImageMontageCenterRnd(centerRnd);
+        window.requestAnimationFrame(() => {
+            setEventImageMontageCenterRnd(centerRnd);
+        });
     };
 
     const [eventImageMontageCenterRnd, setEventImageMontageCenterRnd] = useState(leftRnd + widthRnd / 2);
